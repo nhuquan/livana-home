@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:livana/todo/task_provider.dart';
 
 class TodoScreen extends StatelessWidget {
   const TodoScreen({super.key});
@@ -7,7 +9,7 @@ class TodoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todo App'),
+        title: const Text('Todo'),
       ),
       body: Column(
         children: [
@@ -19,33 +21,37 @@ class TodoScreen extends StatelessWidget {
   }
 }
 
-class TaskProvider extends ChangeNotifier {
-  List<String> tasks = [];
-
-  void addTask(String task) {
-    tasks.add(task);
-    notifyListeners();
-  }
-
-  void removeTask(int index) {
-    tasks.removeAt(index);
-    notifyListeners();
-  }
-}
-
-class TaskList extends StatelessWidget {
+class TaskList extends ConsumerWidget {
   const TaskList({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.watch(taskListProvider);
+
     return Expanded(
       child: ListView.builder(
+        itemCount: data.length,
         itemBuilder: (context, index) {
+          final Task item = data[index];
           return ListTile(
-            title: const Text('task'),
+            title: item.completed
+                ? Text(item.name,
+                    style:
+                        const TextStyle(decoration: TextDecoration.lineThrough))
+                : Text(item.name),
             trailing: IconButton(
               icon: const Icon(Icons.delete),
-              onPressed: () {},
+              onPressed: () {
+                ref.read(taskListProvider.notifier).removeTask(item);
+              },
+            ),
+            leading: IconButton(
+              icon: item.completed
+                  ? const Icon(Icons.check)
+                  : const Icon(Icons.hourglass_empty),
+              onPressed: () {
+                ref.read(taskListProvider.notifier).complete(item);
+              },
             ),
           );
         },
@@ -54,13 +60,13 @@ class TaskList extends StatelessWidget {
   }
 }
 
-class TaskInput extends StatelessWidget {
+class TaskInput extends ConsumerWidget {
   final TextEditingController _controller = TextEditingController();
 
   TaskInput({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -74,7 +80,14 @@ class TaskInput extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(icon: const Icon(Icons.add), onPressed: () {}),
+          IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                ref.read(taskListProvider.notifier).addTask(Task(
+                    name: _controller.value.text,
+                    completed: false,
+                    id: DateTime.timestamp().millisecondsSinceEpoch));
+              }),
         ],
       ),
     );
