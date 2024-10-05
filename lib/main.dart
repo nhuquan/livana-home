@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:livana/todo/todo_screen.dart';
+import 'package:livana/landing_page.dart';
+import 'package:livana/onboarding_page.dart';
 
 void main() {
-  runApp(const ProviderScope(child: TodoApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class TodoApp extends StatelessWidget {
-  const TodoApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      routes: {
+        '/home': (context) => LandingPage(),
+        '/onboarding': (context) => OnboardingPage(),
+      },
       debugShowCheckedModeBanner: false,
-      home: TodoScreen(),
+      home: OnboardingPage(),
     );
   }
 }
