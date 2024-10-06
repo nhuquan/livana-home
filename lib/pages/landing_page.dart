@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:livana/widgets/wave_animation_controller.dart';
 
 class LandingPage extends StatelessWidget {
   LandingPage({super.key});
@@ -11,7 +12,7 @@ class LandingPage extends StatelessWidget {
     final bool isLargeScreen = width > 800;
 
     return Theme(
-      data: ThemeData.dark(),
+      data: ThemeData.light(),
       child: Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
@@ -47,9 +48,7 @@ class LandingPage extends StatelessWidget {
         ),
         drawer: isLargeScreen ? null : _drawer(),
         body: const Center(
-          child: Text(
-            "Body",
-          ),
+          child: WaterWaveAnimationPage()
         ),
       ),
     );
@@ -90,9 +89,9 @@ class LandingPage extends StatelessWidget {
 }
 
 final List<String> _menuItems = <String>[
-  'About',
   'Products',
-  'Services',
+  'Blog',
+  'About',
 ];
 
 enum Menu { itemOne, itemTwo, itemThree }
