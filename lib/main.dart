@@ -1,10 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:livana/landing_page.dart';
 import 'package:livana/onboarding_page.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
+
+  if (kIsWeb) {
+    SemanticsBinding.instance.ensureSemantics();
+  }
 }
 
 class MyApp extends StatelessWidget {
