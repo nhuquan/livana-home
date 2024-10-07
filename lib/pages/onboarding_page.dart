@@ -1,29 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:livana/provider/shared_preferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingPage extends ConsumerWidget {
   const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sharedPreferences = ref.watch(sharedPreferencesProvider);
-
-    return sharedPreferences.when(
-        data: (prefs) {
-          if (prefs.getBool('onboarding') == true) {
-            Navigator.of(context).pushNamed('/home');
-            return Container();
-          } else {
-            return OnboardingHome(prefs, context);
-          }
-        },
-        error: (_, __) => CircularProgressIndicator(),
-        loading: () => CircularProgressIndicator());
-  }
-
-  Widget OnboardingHome(SharedPreferences prefs, BuildContext context) {
     return Scaffold(
       body: OnboardingPagePresenter(
         pages: [
@@ -42,11 +24,9 @@ class OnboardingPage extends ConsumerWidget {
           ),
         ],
         onFinish: () {
-          prefs.setBool('onboarding', true);
           Navigator.of(context).pushNamed('/home');
         },
         onSkip: () {
-          prefs.setBool('onboarding', true);
           Navigator.of(context).pushNamed('/home');
         },
       ),
