@@ -22,9 +22,9 @@ class LandingPage extends StatelessWidget {
           leading: isLargeScreen
               ? null
               : IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-          ),
+                  icon: const Icon(Icons.menu),
+                  onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                ),
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
@@ -47,48 +47,47 @@ class LandingPage extends StatelessWidget {
           ],
         ),
         drawer: isLargeScreen ? null : _drawer(),
-        body: const Center(
-          child: WaterWaveAnimationPage()
-        ),
+        body: const Center(child: WaterWaveAnimationPage()),
       ),
     );
   }
 
   Widget _drawer() => Drawer(
-    child: ListView(
-      children: _menuItems
-          .map((item) => ListTile(
-        onTap: () {
-          _scaffoldKey.currentState?.openEndDrawer();
-        },
-        title: Text(item),
-      ))
-          .toList(),
-    ),
-  );
+        child: ListView(
+          children: _menuItems
+              .map((item) => ListTile(
+                    onTap: () {
+                      _scaffoldKey.currentState?.openEndDrawer();
+                    },
+                    title: Text(item),
+                  ))
+              .toList(),
+        ),
+      );
 
   Widget _navBarItems() => Row(
-    mainAxisAlignment: MainAxisAlignment.end,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: _menuItems
-        .map(
-          (item) => InkWell(
-        onTap: () {},
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: 24.0, horizontal: 16),
-          child: Text(
-            item,
-            style: const TextStyle(fontSize: 18),
-          ),
-        ),
-      ),
-    )
-        .toList(),
-  );
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: _menuItems
+            .map(
+              (item) => InkWell(
+                onTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 24.0, horizontal: 16),
+                  child: Text(
+                    item,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+            )
+            .toList(),
+      );
 }
 
 final List<String> _menuItems = <String>[
+  'Home',
   'Products',
   'Blog',
   'About',
@@ -106,18 +105,18 @@ class _ProfileIcon extends StatelessWidget {
         offset: const Offset(0, 40),
         onSelected: (Menu item) {},
         itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
-          const PopupMenuItem<Menu>(
-            value: Menu.itemOne,
-            child: Text('Account'),
-          ),
-          const PopupMenuItem<Menu>(
-            value: Menu.itemTwo,
-            child: Text('Settings'),
-          ),
-          const PopupMenuItem<Menu>(
-            value: Menu.itemThree,
-            child: Text('Sign Out'),
-          ),
-        ]);
+              const PopupMenuItem<Menu>(
+                value: Menu.itemOne,
+                child: Text('Account'),
+              ),
+              const PopupMenuItem<Menu>(
+                value: Menu.itemTwo,
+                child: Text('Settings'),
+              ),
+              const PopupMenuItem<Menu>(
+                value: Menu.itemThree,
+                child: Text('Sign Out'),
+              ),
+            ]);
   }
 }

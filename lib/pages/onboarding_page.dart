@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:livana/provider/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({Key? key}) : super(key: key);
+class OnboardingPage extends ConsumerWidget {
+  const OnboardingPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sharedPreferences = ref.watch(sharedPreferencesProvider);
+
+    return sharedPreferences.when(
+        data: (prefs) {
+          if (prefs.getBool('onboarding') == true) {
+            Navigator.of(context).pushNamed('/home');
+            return Container();
+          } else {
+            return OnboardingHome(prefs, context);
+          }
+        },
+        error: (_, __) => CircularProgressIndicator(),
+        loading: () => CircularProgressIndicator());
+  }
+
+  Widget OnboardingHome(SharedPreferences prefs, BuildContext context) {
     return Scaffold(
       body: OnboardingPagePresenter(
         pages: [
@@ -21,25 +40,14 @@ class OnboardingPage extends StatelessWidget {
             imageUrl: 'https://i.ibb.co/LvmZypG/storefront-illustration-2.png',
             bgColor: const Color(0xff1eb090),
           ),
-          // OnboardingPageModel(
-          //   title: 'Bookmark your favourites',
-          //   description:
-          //   'Bookmark your favourite quotes to read at a leisure time.',
-          //   imageUrl: 'https://i.ibb.co/420D7VP/building.png',
-          //   bgColor: const Color(0xfffeae4f),
-          // ),
-          // OnboardingPageModel(
-          //   title: 'Follow creators',
-          //   description: 'Follow your favourite creators to stay in the loop.',
-          //   imageUrl: 'https://i.ibb.co/cJqsPSB/scooter.png',
-          //   bgColor: Colors.purple,
-          // ),
         ],
         onFinish: () {
-          Navigator.of(context).pushReplacementNamed('/home');
+          prefs.setBool('onboarding', true);
+          Navigator.of(context).pushNamed('/home');
         },
         onSkip: () {
-          Navigator.of(context).pushReplacementNamed('/home');
+          prefs.setBool('onboarding', true);
+          Navigator.of(context).pushNamed('/home');
         },
       ),
     );
@@ -52,8 +60,7 @@ class OnboardingPagePresenter extends StatefulWidget {
   final VoidCallback? onFinish;
 
   const OnboardingPagePresenter(
-      {Key? key, required this.pages, this.onSkip, this.onFinish})
-      : super(key: key);
+      {super.key, required this.pages, this.onSkip, this.onFinish});
 
   @override
   State<OnboardingPagePresenter> createState() => _OnboardingPageState();
@@ -76,12 +83,10 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
           child: Column(
             children: [
               Expanded(
-                // Pageview to render each page
                 child: PageView.builder(
                   controller: _pageController,
                   itemCount: widget.pages.length,
                   onPageChanged: (idx) {
-                    // Change current page when pageview changes
                     setState(() {
                       _currentPage = idx;
                     });
