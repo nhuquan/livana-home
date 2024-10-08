@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:livana/widgets/app_bar.dart';
 import 'package:livana/widgets/drawer.dart';
-import 'package:livana/widgets/wave_animation_controller.dart';
 
-final List<String> menuItems = <String>[
-  'Home',
-  'Products',
-  'Blog',
-  'About',
-];
-
-class LandingPage extends StatelessWidget {
-  LandingPage({super.key});
+class ProductListingPage extends StatelessWidget {
+  ProductListingPage({super.key});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -26,7 +18,7 @@ class LandingPage extends StatelessWidget {
         key: _scaffoldKey,
         appBar: MyAppBar(scaffoldKey: _scaffoldKey),
         drawer: isLargeScreen ? null : MyDrawer(scaffoldKey: _scaffoldKey),
-        body: const Center(child: WaterWaveAnimationPage()),
+        body: const Center(child: Text("product listing page")),
       ),
     );
   }
