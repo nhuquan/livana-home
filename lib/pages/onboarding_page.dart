@@ -7,30 +7,34 @@ class OnboardingPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: OnboardingPagePresenter(
-        pages: [
-          OnboardingPageModel(
-            title: 'Livana Software',
-            description:
-                'Enjoy the best of the world in the palm of your hands.',
-            imageUrl: 'https://i.ibb.co/cJqsPSB/scooter.png',
-            bgColor: Colors.indigo,
-          ),
-          OnboardingPageModel(
-            title: 'Connect with your friends.',
-            description: 'Connect with your friends anytime anywhere.',
-            imageUrl: 'https://i.ibb.co/LvmZypG/storefront-illustration-2.png',
-            bgColor: const Color(0xff1eb090),
-          ),
-        ],
-        onFinish: () {
-          Navigator.of(context).pushNamed('/home');
-        },
-        onSkip: () {
-          Navigator.of(context).pushNamed('/home');
-        },
-      ),
-    );
+        body: Container(
+      color: Colors.grey,
+      child: Center(child: Text("Hello Livana Software")),
+    )
+        // body: OnboardingPagePresenter(
+        //   pages: [
+        //     OnboardingPageModel(
+        //       title: 'Livana Software',
+        //       description:
+        //           'Enjoy the best of the world in the palm of your hands.',
+        //       imageUrl: 'https://i.ibb.co/cJqsPSB/scooter.png',
+        //       bgColor: Colors.indigo,
+        //     ),
+        //     OnboardingPageModel(
+        //       title: 'Connect with your friends.',
+        //       description: 'Connect with your friends anytime anywhere.',
+        //       imageUrl: 'https://i.ibb.co/LvmZypG/storefront-illustration-2.png',
+        //       bgColor: const Color(0xff1eb090),
+        //     ),
+        //   ],
+        //   onFinish: () {
+        //     Navigator.of(context).pushNamed('/home');
+        //   },
+        //   onSkip: () {
+        //     Navigator.of(context).pushNamed('/home');
+        //   },
+        // ),
+        );
   }
 }
 
