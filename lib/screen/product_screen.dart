@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OurWorkScreen extends StatelessWidget {
   const OurWorkScreen({super.key});
@@ -13,18 +14,24 @@ class OurWorkScreen extends StatelessWidget {
       {
         'title': 'DailyWisdom',
         'imagePath': 'assets/images/dailyWisdom.png',
+        'url':
+            'https://play.google.com/store/apps/details?id=dev.livana.dailywisdom'
       },
       {
         'title': 'SoundGround',
         'imagePath': 'assets/images/soundGround.png',
+        'url':
+            'https://play.google.com/store/apps/details?id=dev.livana.soundground',
       },
       {
         'title': 'Flappy',
         'imagePath': 'assets/images/flappy.png',
-      }, // Replace with actual paths
+        'url': 'https://flappy.livana.dev/',
+      },
       {
         'title': 'StarHunter',
         'imagePath': 'assets/images/starHunter.png',
+        'url': 'https://nhuquan.github.io/starHunter/',
       },
     ];
 
@@ -58,6 +65,7 @@ class OurWorkScreen extends StatelessWidget {
                             .map((item) => _WorkItemCard(
                                   title: item['title']!,
                                   imagePath: item['imagePath']!,
+                                  url: item['url']!,
                                   isSmall: true,
                                 ))
                             .toList(),
@@ -69,9 +77,9 @@ class OurWorkScreen extends StatelessWidget {
                         children: workItems
                             .map((item) => Expanded(
                                   child: _WorkItemCard(
-                                    title: item['title']!,
-                                    imagePath: item['imagePath']!,
-                                  ),
+                                      title: item['title']!,
+                                      imagePath: item['imagePath']!,
+                                      url: item['url']!),
                                 ))
                             .toList(),
                       );
@@ -112,12 +120,16 @@ class OurWorkScreen extends StatelessWidget {
 
 class _WorkItemCard extends StatelessWidget {
   final String title;
+  final String url;
   final String
       imagePath; // You'll need to add placeholder images to your assets
   final bool isSmall;
 
   const _WorkItemCard(
-      {required this.title, required this.imagePath, this.isSmall = false});
+      {required this.title,
+      required this.imagePath,
+      this.isSmall = false,
+      required this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -127,44 +139,51 @@ class _WorkItemCard extends StatelessWidget {
         color: Colors.grey[900], // Placeholder color
         clipBehavior: Clip.antiAlias,
         margin: EdgeInsets.all(isSmall ? 8.0 : 12.0),
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            Container(
-              // Placeholder if no image
-              color: Colors.grey[800],
-              alignment: Alignment.center,
-              child:
-                  Icon(Icons.image_outlined, size: 50, color: Colors.grey[600]),
-            ),
-            // Placeholder for image:
-            Image.asset(imagePath,
-                fit: BoxFit.cover,
+        child: InkWell(
+          onTap: () async {
+            if (!await launchUrl(
+              Uri.parse(url),
+              mode: LaunchMode.externalApplication,
+            )) {
+              throw Exception('Could not launch $url');
+            }
+          },
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+              Container(
+                // Placeholder if no image
+                color: Colors.grey[800],
+                alignment: Alignment.center,
+                child: Icon(Icons.image_outlined,
+                    size: 50, color: Colors.grey[600]),
+              ),
+              // Placeholder for image:
+              Image.asset(imagePath,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity),
+              Container(
                 width: double.infinity,
-                height: double.infinity),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.black.withOpacity(0.0),
-                    Colors.black.withOpacity(0.8)
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+                padding: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.grey[900]!, Colors.grey[900]!],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: isSmall ? 18 : 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              child: Text(
-                title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: isSmall ? 18 : 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
