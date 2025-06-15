@@ -25,10 +25,10 @@ class ServicesScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            'Livana is a full-service software company that helps\n'
-            'our client face the challenge in their digital \n'
-            'transformation journey. Our expertise is in working directly\n'
-            'with companies as an extension of their team to support rapid\n'
+            'Livana is a full-service software company that helps'
+            'companies to face the challenge in their digital '
+            'transformation journey. Our expertise is in working directly '
+            'with our client as an extension of their team to support rapid '
             'growth and help bring projects to life.',
             style: textTheme.titleLarge?.copyWith(
               fontSize: isSmallScreen ? 16 : 18,

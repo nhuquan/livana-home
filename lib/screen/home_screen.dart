@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
         children: <Widget>[
           Text(
-            'Driving positive change through innovative solutions.',
+            'Where innovation serves humanity.',
             style: textTheme.displayMedium?.copyWith(
               fontWeight: FontWeight.bold,
               fontSize: isSmallScreen ? 36 : 48,

@@ -79945,7 +79945,7 @@ P(a){var s,r,q,p,o,n,m,l,k,j,i,h=this,g=null,f=A.U(a).ok,e=A.bK(a,g,t.w).w.a.a<6
 if(c==null)c=g
 else{s=e?16:18
 s=c.Fz(A.az(B.d.aB(229.5),B.j.D()>>>16&255,B.j.D()>>>8&255,B.j.D()&255),s,1.6)
-c=s}c=A.cK("Please use the form below to request a quote for a\nproject, inquire about a collaboration, or simply say\nhello.",g,g,g,c,g,g)
+c=s}c=A.cK("Please use the form below to request a quote for a project, inquire about a collaboration, or simply say hello.",g,g,g,c,g,g)
 s=f.w
 r=s==null
 q=A.cK("Name (required)",g,g,g,r?g:s.xW(B.ct),g,g)
@@ -79994,7 +79994,7 @@ A.Ix.prototype={
 P(a){var s,r,q=null,p=A.U(a).ok,o=A.bK(a,q,t.w).w.a.a<600,n=p.b
 if(n==null)n=q
 else n=n.ah7(o?36:48,B.aK,1.2)
-n=A.cK("Driving positive change through innovative solutions.",q,q,q,n,q,q)
+n=A.cK("Where innovation serves humanity.",q,q,q,n,q,q)
 s=p.r
 if(s==null)s=q
 else{r=o?16:18
@@ -80069,7 +80069,7 @@ if(s==null)s=q
 else{r=o?16:18
 r=s.Fz(A.az(204,B.j.D()>>>16&255,B.j.D()>>>8&255,B.j.D()&255),r,1.6)
 s=r}r=t.s
-return A.acz(A.h4(A.b([n,B.ko,A.cK("Livana is a full-service software company that helps\nour client face the challenge in their digital \ntransformation journey. Our expertise is in working directly\nwith companies as an extension of their team to support rapid\ngrowth and help bring projects to life.",q,q,q,s,q,q),B.yt,new A.uG("Software delivery",A.b(["Web","Mobile","Backend systems","Game"],r),q),new A.uG("Team augmentation",A.b(["Tech-lead","Fullstack engineer","QA","UX/UI"],r),q),new A.uG("Consultant",A.b(["Training","Adhoc support","On demand session"],r),q)],t.E),B.aR,B.aq,B.aL),q)}}
+return A.acz(A.h4(A.b([n,B.ko,A.cK("Livana is a full-service software company that helpscompanies to face the challenge in their digital transformation journey. Our expertise is in working directly with our client as an extension of their team to support rapid growth and help bring projects to life.",q,q,q,s,q,q),B.yt,new A.uG("Software delivery",A.b(["Web","Mobile","Backend systems","Game"],r),q),new A.uG("Team augmentation",A.b(["Tech-lead","Fullstack engineer","QA","UX/UI"],r),q),new A.uG("Consultant",A.b(["Training","Adhoc support","On demand session"],r),q)],t.E),B.aR,B.aq,B.aL),q)}}
 A.uG.prototype={
 P(a){var s,r=null,q=A.U(a),p=B.d.aB(178.5),o=A.az(p,B.j.D()>>>16&255,B.j.D()>>>8&255,B.j.D()&255)
 o=q.agX(new A.nq(B.a1,A.az(p,B.j.D()>>>16&255,B.j.D()>>>8&255,B.j.D()&255),B.l,r,r,r,r,r,r,B.BC,B.l,r,r,r,r,r,r,r,r,r,r,r,r,r,r,B.C4,B.l,r,r,B.lV,B.j,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,B.lV,B.j),o)

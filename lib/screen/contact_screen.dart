@@ -145,7 +145,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Please use the form below to request a quote for a\nproject, inquire about a collaboration, or simply say\nhello.',
+              'Please use the form below to request a quote for a project, inquire about a collaboration, or simply say hello.',
               style: textTheme.titleLarge?.copyWith(
                 fontSize: isSmallScreen ? 16 : 18,
                 height: 1.6,
