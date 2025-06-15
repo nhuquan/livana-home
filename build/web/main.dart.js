@@ -79999,7 +79999,7 @@ s=p.r
 if(s==null)s=q
 else{r=o?16:18
 r=s.Fz(A.az(204,B.j.D()>>>16&255,B.j.D()>>>8&255,B.j.D()&255),r,1.6)
-s=r}return A.acz(A.h4(A.b([n,B.kq,A.cK("\u1ede hi\u1ec1n g\u1eb7p l\xe0nh - One good turn deserves another\n\nAt Livana, we understand that in the modern world, technology is often driven by money.\nWhile money is important, it should not be the only motivation.\nWe deliberately chosen to focus our energy to build things that truly matter.\nOur aim is to create product and service that have a meaningful and\npositive impact for both people's live and the society.\nWe believe that value is created from good deed and we are already rewarded for doing it.\n",q,q,q,s,q,q),B.Nf,A.aqq(B.SA,new A.a29(a),q)],t.E),B.aR,B.jJ,B.aL),q)}}
+s=r}return A.acz(A.h4(A.b([n,B.kq,A.cK("\u1ede hi\u1ec1n g\u1eb7p l\xe0nh - One good turn deserves another\n\nAt Livana, we understand that in the modern world, technology is often driven by money.While money is important, it should not be the only motivation.\nWe deliberately chosen to focus our time and energy to build things that truly matter.Our aim is to create product and service that have a meaningful and positive impact for both people's live and the society.We believe that value is created from good deed and we are already rewarded for doing it.\n",q,q,q,s,q,q),B.Nf,A.aqq(B.SA,new A.a29(a),q)],t.E),B.aR,B.jJ,B.aL),q)}}
 A.a29.prototype={
 $0(){this.a.ag(t.Pu).f.o4(B.Nq)},
 $S:0}
