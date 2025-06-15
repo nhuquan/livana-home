@@ -4,10 +4,24 @@ import 'package:livana/screen/contact_screen.dart';
 import 'package:livana/screen/home_screen.dart';
 import 'package:livana/screen/product_screen.dart';
 import 'package:livana/screen/services_screen.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+const String supabaseUrl =
+    'https://xykmitvmzjofzdvmhnui.supabase.co'; // Replace with your actual Supabase URL
+const String supabaseAnonKey =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5a21pdHZtempvZnpkdm1obnVpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk5NDIyNDUsImV4cCI6MjA2NTUxODI0NX0.Zl_xOpW7bJa6xutd6pr3YX0-Jac01TUqtKJWQvyqJZs'; // Replace with your actual
+
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Required for Supabase init before runApp
+  await Supabase.initialize(
+    url: supabaseUrl,
+    anonKey: supabaseAnonKey,
+  );
   runApp(MyApp());
 }
+
+final supabase = Supabase.instance.client;
 
 // Define your accent color
 const Color kAccentColor = Color(0xFFFFA500); // Example orange

@@ -38,6 +38,60 @@
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+<!--  <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>-->
+<!--  <script type="text/javascript">-->
+<!--    var flutterRecaptchaTokenCallback; // Global callback for Flutter-->
+<!--    var recaptchaWidgetId;-->
+
+<!--    // Called when reCAPTCHA API is loaded-->
+<!--    function onRecaptchaLoad() {-->
+<!--      console.log("reCAPTCHA API Loaded.");-->
+<!--      // We will render the widget explicitly from Flutter-->
+<!--    }-->
+
+<!--    function executeRecaptcha(callback) {-->
+<!--      flutterRecaptchaTokenCallback = callback; // Store the Dart callback-->
+<!--      if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {-->
+<!--        grecaptcha.ready(function() {-->
+<!--          if (recaptchaWidgetId === undefined) {-->
+<!--            // Render the invisible reCAPTCHA if not already rendered-->
+<!--            // Ensure you have a div with id 'recaptcha-container' in your Flutter widget or here-->
+<!--            recaptchaWidgetId = grecaptcha.render('recaptcha-container', { // 'recaptcha-container' is the ID of an empty div-->
+<!--              'sitekey': '6LfWQWErAAAAAB8O6YlMqqCrg4L2Mt-TA8YpDQ1Y', // Replace with your Site Key-->
+<!--              'badge': 'bottomright', // 'inline' or 'none' (if you manage the badge yourself)-->
+<!--              'size': 'invisible',-->
+<!--              'callback': 'onRecaptchaTokenReceived', // JS function to call when token is received-->
+<!--              'error-callback': 'onRecaptchaError'-->
+<!--            });-->
+<!--          }-->
+<!--          grecaptcha.execute(recaptchaWidgetId);-->
+<!--        });-->
+<!--      } else {-->
+<!--        console.error("grecaptcha not ready or undefined");-->
+<!--        if (flutterRecaptchaTokenCallback) {-->
+<!--          flutterRecaptchaTokenCallback(null, "grecaptcha_not_ready");-->
+<!--        }-->
+<!--      }-->
+<!--    }-->
+
+<!--    function onRecaptchaTokenReceived(token) {-->
+<!--      console.log("reCAPTCHA Token Received (JS): " + token);-->
+<!--      if (flutterRecaptchaTokenCallback) {-->
+<!--        flutterRecaptchaTokenCallback(token, null); // Pass token to Flutter, no error-->
+<!--      }-->
+<!--    }-->
+
+<!--    function onRecaptchaError() {-->
+<!--      console.error("reCAPTCHA execution error.");-->
+<!--      if (flutterRecaptchaTokenCallback) {-->
+<!--        flutterRecaptchaTokenCallback(null, "recaptcha_execution_error"); // Pass null token and error message-->
+<!--      }-->
+<!--      // It's good practice to reset the reCAPTCHA if there's an error so the user can try again-->
+<!--      if (typeof grecaptcha !== 'undefined' && recaptchaWidgetId !== undefined) {-->
+<!--        grecaptcha.reset(recaptchaWidgetId);-->
+<!--      }-->
+<!--    }-->
+<!--  </script>-->
 </head>
 <body>
   <script>

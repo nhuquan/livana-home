@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="livana">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>livana</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = "3462253674";
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
+<!--  <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>-->
+<!--  <script type="text/javascript">-->
+<!--    var flutterRecaptchaTokenCallback; // Global callback for Flutter-->
+<!--    var recaptchaWidgetId;-->
+
+<!--    // Called when reCAPTCHA API is loaded-->
+<!--    function onRecaptchaLoad() {-->
+<!--      console.log("reCAPTCHA API Loaded.");-->
+<!--      // We will render the widget explicitly from Flutter-->
+<!--    }-->
+
+<!--    function executeRecaptcha(callback) {-->
+<!--      flutterRecaptchaTokenCallback = callback; // Store the Dart callback-->
+<!--      if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {-->
+<!--        grecaptcha.ready(function() {-->
+<!--          if (recaptchaWidgetId === undefined) {-->
+<!--            // Render the invisible reCAPTCHA if not already rendered-->
+<!--            // Ensure you have a div with id 'recaptcha-container' in your Flutter widget or here-->
+<!--            recaptchaWidgetId = grecaptcha.render('recaptcha-container', { // 'recaptcha-container' is the ID of an empty div-->
+<!--              'sitekey': '6LfWQWErAAAAAB8O6YlMqqCrg4L2Mt-TA8YpDQ1Y', // Replace with your Site Key-->
+<!--              'badge': 'bottomright', // 'inline' or 'none' (if you manage the badge yourself)-->
+<!--              'size': 'invisible',-->
+<!--              'callback': 'onRecaptchaTokenReceived', // JS function to call when token is received-->
+<!--              'error-callback': 'onRecaptchaError'-->
+<!--            });-->
+<!--          }-->
+<!--          grecaptcha.execute(recaptchaWidgetId);-->
+<!--        });-->
+<!--      } else {-->
+<!--        console.error("grecaptcha not ready or undefined");-->
+<!--        if (flutterRecaptchaTokenCallback) {-->
+<!--          flutterRecaptchaTokenCallback(null, "grecaptcha_not_ready");-->
+<!--        }-->
+<!--      }-->
+<!--    }-->
+
+<!--    function onRecaptchaTokenReceived(token) {-->
+<!--      console.log("reCAPTCHA Token Received (JS): " + token);-->
+<!--      if (flutterRecaptchaTokenCallback) {-->
+<!--        flutterRecaptchaTokenCallback(token, null); // Pass token to Flutter, no error-->
+<!--      }-->
+<!--    }-->
+
+<!--    function onRecaptchaError() {-->
+<!--      console.error("reCAPTCHA execution error.");-->
+<!--      if (flutterRecaptchaTokenCallback) {-->
+<!--        flutterRecaptchaTokenCallback(null, "recaptcha_execution_error"); // Pass null token and error message-->
+<!--      }-->
+<!--      // It's good practice to reset the reCAPTCHA if there's an error so the user can try again-->
+<!--      if (typeof grecaptcha !== 'undefined' && recaptchaWidgetId !== undefined) {-->
+<!--        grecaptcha.reset(recaptchaWidgetId);-->
+<!--      }-->
+<!--    }-->
+<!--  </script>-->
+</head>
+<body>
+  <script>
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

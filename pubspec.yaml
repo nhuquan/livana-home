@@ -12,6 +12,9 @@ dependencies:
   google_fonts: ^6.2.1
   http:
   url_launcher:
+  supabase_flutter:
+  js:
+
 
 dev_dependencies:
   flutter_test:

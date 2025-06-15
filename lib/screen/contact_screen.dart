@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import '../main.dart'; // For color constants
 
@@ -19,6 +16,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
   final _emailController = TextEditingController();
   final _subjectController = TextEditingController();
   final _messageController = TextEditingController();
+  bool _isSubmitting = false; // To disable button during submission
 
   @override
   void dispose() {
@@ -31,57 +29,45 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
   }
 
   void _submitForm() async {
-    if (_formKey.currentState!.validate()) {
-      // Process data
+    if (_formKey.currentState!.validate() && !_isSubmitting) {
+      setState(() {
+        _isSubmitting = true;
+      });
+
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              'Form Submitted!\nName: ${_firstNameController.text} ${_lastNameController.text}\nEmail: ${_emailController.text}\nSubject: ${_subjectController.text}\nMessage: ${_messageController.text}'),
-          backgroundColor: kAccentColor,
-        ),
+        const SnackBar(
+            content: Text('Submitting...'), duration: Duration(seconds: 3)),
       );
-      final String backendUrl = 'YOUR_BACKEND_API_ENDPOINT_HERE';
 
       try {
-        final response = await http.post(
-          Uri.parse(backendUrl),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF--8',
-          },
-          body: jsonEncode(<String, String>{
-            'firstName': _firstNameController.text,
-            'lastName': _lastNameController.text,
-            'email': _emailController.text,
-            'subject': _subjectController.text,
-            'message': _messageController.text,
-          }),
-        );
+        // Data to insert
+        final Map<String, dynamic> formData = {
+          'first_name': _firstNameController.text,
+          'last_name': _lastNameController.text,
+          'email': _emailController.text,
+          'subject': _subjectController.text,
+          'message': _messageController.text,
+          // 'ip_address': null, // You could try to get this if needed, but it's trickier from client-side
+          // 'user_agent': null, // Same as above
+        };
 
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          // Success
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('Thank you! Your message has been sent.'),
-              backgroundColor: kAccentColor, // Or your success color
-            ),
-          );
-          _formKey.currentState!.reset();
-          _firstNameController.clear();
-          _lastNameController.clear();
-          _emailController.clear();
-          _subjectController.clear();
-          _messageController.clear();
-        } else {
-          // Handle server errors
-          print('Server error: ${response.statusCode}');
-          print('Response body: ${response.body}');
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content:
-                    Text('Failed to send message. Please try again later.'),
-                backgroundColor: Colors.redAccent),
-          );
-        }
+        // Insert data into Supabase
+        // 'contact_messages' should match your table name in Supabase
+        await supabase.from('contact_messages').insert(formData);
+
+        // Success
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Thank you! Your message has been received.'),
+            backgroundColor: kAccentColor,
+          ),
+        );
+        _formKey.currentState!.reset();
+        _firstNameController.clear();
+        _lastNameController.clear();
+        _emailController.clear();
+        _subjectController.clear();
+        _messageController.clear();
       } catch (e) {
         // Handle network errors or other exceptions
         print('Error sending form: $e');
@@ -91,7 +77,16 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                   'An error occurred. Please check your connection and try again.'),
               backgroundColor: Colors.redAccent),
         );
+      } finally {
+        setState(() {
+          _isSubmitting = false;
+        });
       }
+    } else if (_isSubmitting) {
+      // Optionally inform user if they click again while submitting
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Submission in progress...')),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -257,8 +252,20 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: ElevatedButton(
-                onPressed: _submitForm,
-                child: const Text('Submit'),
+                onPressed: _isSubmitting ? null : _submitForm,
+                style: ElevatedButton.styleFrom(
+                    disabledBackgroundColor:
+                        kButtonBackgroundColor.withOpacity(0.5)),
+                child: _isSubmitting
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation(kButtonTextColor),
+                        ),
+                      )
+                    : Text('Submit'),
               ),
             ),
             const SizedBox(height: 20), // Extra space at bottom
