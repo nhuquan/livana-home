@@ -23,12 +23,12 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 30),
           Text(
             'Ở hiền gặp lành - One good turn deserves another\n\n'
-            'At Livana, we understand that in the modern world, technology is often driven by money.'
+            'At Livana, we understand that in the modern world, technology is often driven by money. '
             'While money is important, it should not be the only motivation.\n'
-            'We deliberately chosen to focus our time and energy to build things that truly matter.'
+            'Hence, we deliberately chosen to focus our time and energy to build things that truly matter.'
             'Our aim is to create product and service that have a meaningful and '
-            'positive impact for both people\'s live and the society.'
-            'We believe that value is created from good deed and we are already rewarded for doing it.\n',
+            'positive impact for both people\'s live and the society.\n'
+            'We believe that real value is created from good deed and we are rewarded enough already just by doing it.\n',
             style: textTheme.titleLarge?.copyWith(
               fontSize: isSmallScreen ? 16 : 18,
               height: 1.6,

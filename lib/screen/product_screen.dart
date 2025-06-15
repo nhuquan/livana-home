@@ -40,6 +40,7 @@ class OurWorkScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Flexible(
+          flex: 2,
           // Allows the work items grid/row to take available space
           child: SingleChildScrollView(
             // In case there are many items
@@ -91,7 +92,9 @@ class OurWorkScreen extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 40.0, bottom: 20.0),
+          padding: EdgeInsets.only(
+              top: isSmallScreen ? 20 : 40.0,
+              bottom: isSmallScreen ? 20.0 : 10),
           child: Center(
             child: Column(
               children: [
@@ -99,10 +102,10 @@ class OurWorkScreen extends StatelessWidget {
                   'Let\'s build something beautiful.',
                   style: textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
-                    fontSize: isSmallScreen ? 24 : 32,
+                    fontSize: isSmallScreen ? 18 : 32,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: isSmallScreen ? 10 : 20),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/contact');
