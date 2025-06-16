@@ -150,10 +150,29 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: kBackgroundColor,
         elevation: 0,
         titleSpacing: isDesktop ? 40 : 20,
-        title: Text(
-          'Livana',
-          style: TextStyle(
-              fontSize: 30, fontWeight: FontWeight.bold, color: kTextColor),
+        title: OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            // foregroundColor: Colors.deepPurple, // For text and icon color (if not set in Text widget)
+            side: BorderSide(
+              color: Colors.white, // Your custom border color
+              width: 2.0, // Adjust border width
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25.0), // Adjust corner radius
+            ),
+            padding: EdgeInsets.only(top: 0, right: 20, bottom: 10, left: 20),
+            // padding: EdgeInsets.only(bottom: 10, left: 20, right: 20),
+            // You can also set minimumSize, backgroundColor (for fill), etc.
+            // backgroundColor: Colors.deepPurple.withOpacity(0.1), // Optional: subtle background
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/');
+          },
+          child: Text('Livana',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: kTextColor)),
         ),
         actions: isDesktop
             ? <Widget>[
