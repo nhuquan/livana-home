@@ -80149,7 +80149,7 @@ A.a2b.prototype={
 $0(){this.a.ag(t.Pu).f.o5(B.Np)},
 $S:0}
 A.JW.prototype={
-P(a){var s,r,q,p,o=null,n=A.U(a).ok,m=A.bK(a,o,t.w).w.a.a<768,l=t.N,k=A.b([A.a6(["title","DailyWisdom","imagePath","assets/images/dailyWisdom.png","url","https://play.google.com/store/apps/details?id=dev.livana.dailywisdom"],l,l),A.a6(["title","SoundGround","imagePath","assets/images/soundGround.png","url","https://play.google.com/store/apps/details?id=dev.livana.soundground"],l,l),A.a6(["title","Flappy","imagePath","assets/images/flappy.png","url","https://flappy.livana.dev/"],l,l),A.a6(["title","StarHunter","imagePath","assets/images/starHunter.png","url","https://nhuquan.github.io/starHunter/"],l,l)],t.m0)
+P(a){var s,r,q,p,o=null,n=A.U(a).ok,m=A.bK(a,o,t.w).w.a.a<768,l=t.N,k=A.b([A.a6(["title","DailyWisdom","imagePath","assets/images/dailyWisdom.png","url","https://play.google.com/store/apps/details?id=dev.livana.dailywisdom"],l,l),A.a6(["title","SoundGround","imagePath","assets/images/soundGround.png","url","https://play.google.com/store/apps/details?id=dev.livana.soundground"],l,l),A.a6(["title","Flappy","imagePath","assets/images/flappy.png","url","https://flappy.livana.dev/"],l,l),A.a6(["title","StarHunter","imagePath","assets/images/starHunter.png","url","https://nhuquan.github.io/starHunter/"],l,l),A.a6(["title","Mai","imagePath","assets/images/mai.png","url","https://livana.dev/#/product"],l,l)],t.m0)
 l=t.E
 s=A.b([],l)
 if(m){r=n.b

@@ -33,6 +33,11 @@ class OurWorkScreen extends StatelessWidget {
         'imagePath': 'assets/images/starHunter.png',
         'url': 'https://nhuquan.github.io/starHunter/',
       },
+      {
+        'title': 'Mai',
+        'imagePath': 'assets/images/mai.png',
+        'url': 'https://livana.dev/#/product',
+      },
     ];
 
     return Column(
