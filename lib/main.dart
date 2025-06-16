@@ -160,7 +160,7 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25.0), // Adjust corner radius
             ),
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
             // padding: EdgeInsets.only(bottom: 10, left: 20, right: 20),
             // You can also set minimumSize, backgroundColor (for fill), etc.
             // backgroundColor: Colors.deepPurple.withOpacity(0.1), // Optional: subtle background
