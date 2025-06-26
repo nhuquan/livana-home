@@ -36,7 +36,7 @@ class OurWorkScreen extends StatelessWidget {
       {
         'title': 'Mai',
         'imagePath': 'assets/images/mai.png',
-        'url': 'https://livana.dev/#/product',
+        'url': 'https://mai.livana.dev/',
       },
     ];
 
