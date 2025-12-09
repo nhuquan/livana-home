@@ -103,31 +103,48 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
     int maxLines = 1,
     TextInputType keyboardType = TextInputType.text,
   }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(subLabel,
-            style: TextStyle(color: kTextColor.withOpacity(0.8), fontSize: 14)),
-        const SizedBox(height: 6),
-        TextFormField(
-          controller: controller,
-          validator: validator,
-          maxLines: maxLines,
-          keyboardType: keyboardType,
-          style: const TextStyle(color: kFormFieldTextColor, fontSize: 16),
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: kFormFieldBackgroundColor,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.0),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            errorStyle: const TextStyle(color: kAccentColor, fontSize: 12),
+    return Container(
+      padding: EdgeInsets.all(32.0),
+      decoration: BoxDecoration(
+        // color: kBackgroundColor,
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(
+            color: Colors.grey.shade300,
+            width: 1.0,
           ),
-        ),
-      ],
+          boxShadow: [
+            BoxShadow(color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3),
+            )
+          ]
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(subLabel,
+              style: TextStyle( fontSize: 14)),
+          const SizedBox(height: 6),
+          TextFormField(
+            controller: controller,
+            validator: validator,
+            maxLines: maxLines,
+            keyboardType: keyboardType,
+            style: const TextStyle(color: kFormFieldTextColor, fontSize: 16),
+            decoration: InputDecoration(
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4.0),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              errorStyle: const TextStyle(color: kAccentColor, fontSize: 12),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -149,7 +166,6 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
               style: textTheme.titleLarge?.copyWith(
                 fontSize: isSmallScreen ? 16 : 18,
                 height: 1.6,
-                color: kTextColor.withOpacity(0.9),
               ),
             ),
             const SizedBox(height: 30),
@@ -159,36 +175,16 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                 style: textTheme.titleMedium
                     ?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
-            Row(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start, // Align validator messages properly
-              children: [
-                Expanded(
-                  child: _buildFormField(
-                    controller: _firstNameController,
-                    subLabel: 'First Name',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your first name.';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _buildFormField(
-                    controller: _lastNameController,
-                    subLabel: 'Last Name',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your last name.';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-              ],
+
+            _buildFormField(
+              controller: _lastNameController,
+              subLabel: 'Your Name',
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your name.';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 24),
 
@@ -207,23 +203,6 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                 }
                 if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
                   return 'Please enter a valid email address.';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 24),
-
-            // Subject Field
-            Text('Subject (required)',
-                style: textTheme.titleMedium
-                    ?.copyWith(fontWeight: FontWeight.w600)),
-            const SizedBox(height: 10),
-            _buildFormField(
-              controller: _subjectController,
-              subLabel: '', // Main label is enough
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a subject.';
                 }
                 return null;
               },

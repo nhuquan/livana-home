@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(32.0),
         decoration: BoxDecoration(
-          color: kBackgroundColor,
+          // color: kBackgroundColor,
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
             color: Colors.grey.shade300,
@@ -58,7 +58,6 @@ class HomeScreen extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: isSmallScreen ? 16 : 18,
                 height: 1.7,
-                color: kTextColor.withOpacity(0.7),
                 fontWeight: FontWeight.w400,
               ),
             ),
