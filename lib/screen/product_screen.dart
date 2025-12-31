@@ -12,6 +12,11 @@ class OurWorkScreen extends StatelessWidget {
     // Sample data for work items
     final workItems = [
       {
+        'title': 'Focus Tracker',
+        'imagePath': 'assets/images/focusTracker.png',
+        'url': 'https://focus.livana.dev/',
+      },
+      {
         'title': 'DailyWisdom',
         'imagePath': 'assets/images/dailyWisdom.png',
         'url':
