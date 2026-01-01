@@ -19,7 +19,7 @@ class OurWorkScreen extends StatelessWidget {
       },
       {
         'title': 'Engaged Buddhism',
-        'description': 'Applying Buddhist teachings to social justice.',
+        'description': 'Buddhist teachings from Zen Master Thich Nhat Hanh',
         'imagePath': 'assets/images/engaged_buddhism.png',
         'url': 'https://phapthoai.livana.dev',
       },
@@ -37,7 +37,7 @@ class OurWorkScreen extends StatelessWidget {
             'https://play.google.com/store/apps/details?id=dev.livana.dailywisdom'
       },
       {
-        'title': 'SoundGround',
+        'title': 'Sound Ground',
         'description': 'Relax and focus with ambient sounds.',
         'imagePath': 'assets/images/soundGround.png',
         'url':
@@ -50,7 +50,7 @@ class OurWorkScreen extends StatelessWidget {
         'url': 'https://flappy.livana.dev/',
       },
       {
-        'title': 'StarHunter',
+        'title': 'Star Hunter',
         'description': 'Explore the universe and hunt for stars.',
         'imagePath': 'assets/images/starHunter.png',
         'url': 'https://nhuquan.github.io/starHunter/',
