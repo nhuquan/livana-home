@@ -13,33 +13,51 @@ class OurWorkScreen extends StatelessWidget {
     final workItems = [
       {
         'title': 'Focus Tracker',
+        'description': 'Track your focus time and build productive habits.',
         'imagePath': 'assets/images/focusTracker.png',
         'url': 'https://focus.livana.dev/',
       },
       {
+        'title': 'Engaged Buddhism',
+        'description': 'Applying Buddhist teachings to social justice.',
+        'imagePath': 'assets/images/engaged_buddhism.png',
+        'url': 'https://phapthoai.livana.dev',
+      },
+      {
+        'title': 'Moon Calendar',
+        'description': 'Track moon phases and connect with lunar cycles.',
+        'imagePath': 'assets/images/moon_calendar.png',
+        'url': 'https://moon.livana.dev',
+      },
+      {
         'title': 'DailyWisdom',
+        'description': 'Daily inspirational quotes to brighten your day.',
         'imagePath': 'assets/images/dailyWisdom.png',
         'url':
             'https://play.google.com/store/apps/details?id=dev.livana.dailywisdom'
       },
       {
         'title': 'SoundGround',
+        'description': 'Relax and focus with ambient sounds.',
         'imagePath': 'assets/images/soundGround.png',
         'url':
             'https://play.google.com/store/apps/details?id=dev.livana.soundground',
       },
       {
         'title': 'Flappy',
+        'description': 'A fun and addictive game to challenge your friends.',
         'imagePath': 'assets/images/flappy.png',
         'url': 'https://flappy.livana.dev/',
       },
       {
         'title': 'StarHunter',
+        'description': 'Explore the universe and hunt for stars.',
         'imagePath': 'assets/images/starHunter.png',
         'url': 'https://nhuquan.github.io/starHunter/',
       },
       {
         'title': 'Mai',
+        'description': 'Your personal AI companion for mental wellness.',
         'imagePath': 'assets/images/mai.png',
         'url': 'https://mai.livana.dev/',
       },
@@ -69,32 +87,41 @@ class OurWorkScreen extends StatelessWidget {
                 if (isSmallScreen) const SizedBox(height: 30),
                 LayoutBuilder(
                   builder: (context, constraints) {
+                    int crossAxisCount;
+                    double childAspectRatio;
+                    
                     if (constraints.maxWidth < 600) {
-                      // Mobile: Vertical list
-                      return Column(
-                        children: workItems
-                            .map((item) => _WorkItemCard(
-                                  title: item['title']!,
-                                  imagePath: item['imagePath']!,
-                                  url: item['url']!,
-                                  isSmall: true,
-                                ))
-                            .toList(),
-                      );
+                      crossAxisCount = 2; // Mobile
+                      childAspectRatio = 0.65; // Taller cards for mobile to avoid overflow
+                    } else if (constraints.maxWidth < 1200) {
+                      crossAxisCount = 4; // Tablet
+                      childAspectRatio = 0.70;
                     } else {
-                      // Desktop: Row of cards
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: workItems
-                            .map((item) => Expanded(
-                                  child: _WorkItemCard(
-                                      title: item['title']!,
-                                      imagePath: item['imagePath']!,
-                                      url: item['url']!),
-                                ))
-                            .toList(),
-                      );
+                      crossAxisCount = 6; // Big screen
+                      childAspectRatio = 0.75;
                     }
+
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        childAspectRatio: childAspectRatio,
+                      ),
+                      itemCount: workItems.length,
+                      itemBuilder: (context, index) {
+                        final item = workItems[index];
+                        return _WorkItemCard(
+                          title: item['title']!,
+                          description: item['description']!,
+                          imagePath: item['imagePath']!,
+                          url: item['url']!,
+                          isSmall: constraints.maxWidth < 600,
+                        );
+                      },
+                    );
                   },
                 ),
               ],
@@ -133,70 +160,94 @@ class OurWorkScreen extends StatelessWidget {
 
 class _WorkItemCard extends StatelessWidget {
   final String title;
+  final String description;
   final String url;
-  final String
-      imagePath; // You'll need to add placeholder images to your assets
+  final String imagePath;
   final bool isSmall;
 
-  const _WorkItemCard(
-      {required this.title,
-      required this.imagePath,
-      this.isSmall = false,
-      required this.url});
+  const _WorkItemCard({
+    required this.title,
+    required this.description,
+    required this.imagePath,
+    this.isSmall = false,
+    required this.url,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: isSmall ? 16 / 12 : 3 / 4, // Adjust aspect ratio as needed
-      child: Card(
-        color: Colors.grey[900], // Placeholder color
-        clipBehavior: Clip.antiAlias,
-        margin: EdgeInsets.all(isSmall ? 8.0 : 12.0),
-        child: InkWell(
-          onTap: () async {
-            if (!await launchUrl(
-              Uri.parse(url),
-              mode: LaunchMode.externalApplication,
-            )) {
-              throw Exception('Could not launch $url');
-            }
-          },
-          child: Stack(
-            alignment: Alignment.bottomLeft,
-            children: [
-              Container(
-                // Placeholder if no image
-                color: Colors.grey[800],
-                alignment: Alignment.center,
-                child: Icon(Icons.image_outlined,
-                    size: 50, color: Colors.grey[600]),
-              ),
-              // Placeholder for image:
-              Image.asset(imagePath,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.grey[900]!, Colors.grey[900]!],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+    return Card(
+      color: Colors.grey[900], // Placeholder color
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: InkWell(
+        onTap: () async {
+          if (url == '#') return;
+          if (!await launchUrl(
+            Uri.parse(url),
+            mode: LaunchMode.externalApplication,
+          )) {
+            throw Exception('Could not launch $url');
+          }
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: 5, // Give image slightly more space
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                   Container(
+                    color: Colors.grey[800],
+                    alignment: Alignment.center,
+                    child: Icon(Icons.image_outlined,
+                        size: 50, color: Colors.grey[600]),
                   ),
-                ),
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: isSmall ? 18 : 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                  Image.asset(imagePath, fit: BoxFit.cover),
+                ],
               ),
-            ],
-          ),
+            ),
+            Expanded(
+                flex: 4, // More text space
+                child: Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.grey[900]!, Colors.grey[850]!],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start, // Top align text
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: isSmall ? 15 : 18, // Slightly smaller text on mobile
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 2, // Allow title to wrap
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Flexible( // Use Flexible instead of fixed height/text constraints
+                        child: Text(
+                          description,
+                          style: TextStyle(
+                            color: Colors.grey[400],
+                            fontSize: isSmall ? 11 : 12,
+                          ),
+                          maxLines: 4, // Allow more lines for description
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+          ],
         ),
       ),
     );
