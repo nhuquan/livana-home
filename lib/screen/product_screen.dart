@@ -12,6 +12,12 @@ class OurWorkScreen extends StatelessWidget {
     // Sample data for work items
     final workItems = [
       {
+        'title': 'Garage',
+        'description': 'Smart garage maintenance and vehicle tracking.',
+        'imagePath': 'assets/images/garage.png',
+        'url': 'https://garage.livana.dev',
+      },
+      {
         'title': 'Focus Tracker',
         'description': 'Track your focus time and build productive habits.',
         'imagePath': 'assets/images/focusTracker.png',
