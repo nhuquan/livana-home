@@ -130,17 +130,7 @@ class OurWorkScreen extends StatelessWidget {
                     );
                   },
                 ),
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-              top: isSmallScreen ? 20 : 40.0,
-              bottom: isSmallScreen ? 20.0 : 10),
-          child: Center(
-            child: Column(
-              children: [
+                const SizedBox(height: 40),
                 Text(
                   'Let\'s build something beautiful.',
                   style: textTheme.headlineSmall?.copyWith(
@@ -155,6 +145,7 @@ class OurWorkScreen extends StatelessWidget {
                   },
                   child: const Text('Contact Us'),
                 ),
+
               ],
             ),
           ),
