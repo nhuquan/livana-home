@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:livana/l10n/app_localizations.dart';
 
 import '../main.dart'; // For color constants
 
@@ -35,8 +36,8 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Submitting...'), duration: Duration(seconds: 3)),
+         SnackBar(
+            content: Text(AppLocalizations.of(context)!.submittingMessage), duration: Duration(seconds: 3)),
       );
 
       try {
@@ -58,7 +59,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
         // Success
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Thank you! Your message has been received.'),
+            content: Text(AppLocalizations.of(context)!.successMessage),
             backgroundColor: kAccentColor,
           ),
         );
@@ -72,9 +73,9 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
         // Handle network errors or other exceptions
         print('Error sending form: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
               content: Text(
-                  'An error occurred. Please check your connection and try again.'),
+                  AppLocalizations.of(context)!.errorMessage),
               backgroundColor: Colors.redAccent),
         );
       } finally {
@@ -85,12 +86,12 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
     } else if (_isSubmitting) {
       // Optionally inform user if they click again while submitting
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Submission in progress...')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.submissionInProgress)),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Please correct the errors in the form.'),
+        SnackBar(
+            content: Text(AppLocalizations.of(context)!.formError),
             backgroundColor: Colors.redAccent),
       );
     }
@@ -162,7 +163,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Please use the form below to request a quote for a project, inquire about a collaboration, or simply say hello.',
+              AppLocalizations.of(context)!.contactFormDescription,
               style: textTheme.titleLarge?.copyWith(
                 fontSize: isSmallScreen ? 16 : 18,
                 height: 1.6,
@@ -171,17 +172,17 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
             const SizedBox(height: 30),
 
             // Name Fields
-            Text('Name (required)',
+            Text(AppLocalizations.of(context)!.nameRequired,
                 style: textTheme.titleMedium
                     ?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
 
             _buildFormField(
               controller: _lastNameController,
-              subLabel: 'Your Name',
+              subLabel: AppLocalizations.of(context)!.yourName,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your name.';
+                  return AppLocalizations.of(context)!.enterNameError;
                 }
                 return null;
               },
@@ -189,7 +190,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
             const SizedBox(height: 24),
 
             // Email Field
-            Text('Email (required)',
+            Text(AppLocalizations.of(context)!.emailRequired,
                 style: textTheme.titleMedium
                     ?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
@@ -199,10 +200,10 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your email.';
+                  return AppLocalizations.of(context)!.enterEmailError;
                 }
                 if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                  return 'Please enter a valid email address.';
+                  return AppLocalizations.of(context)!.enterValidEmailError;
                 }
                 return null;
               },
@@ -210,7 +211,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
             const SizedBox(height: 24),
 
             // Message Field
-            Text('Message (required)',
+            Text(AppLocalizations.of(context)!.messageRequired,
                 style: textTheme.titleMedium
                     ?.copyWith(fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
@@ -220,7 +221,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
               maxLines: 6,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your message.';
+                  return AppLocalizations.of(context)!.enterMessageError;
                 }
                 return null;
               },
@@ -244,7 +245,7 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
                           valueColor: AlwaysStoppedAnimation(kButtonTextColor),
                         ),
                       )
-                    : Text('Submit'),
+                    : Text(AppLocalizations.of(context)!.submitButton),
               ),
             ),
             const SizedBox(height: 20), // Extra space at bottom

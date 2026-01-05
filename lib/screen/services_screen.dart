@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:livana/l10n/app_localizations.dart';
 
 import '../main.dart'; // For colors
 
@@ -34,7 +35,7 @@ class ServicesScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Our Services',
+              AppLocalizations.of(context)!.ourServices,
               style: textTheme.displayMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: isSmallScreen ? 36 : 48,
@@ -42,11 +43,7 @@ class ServicesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'Livana is a full-service software company that helps'
-              'companies to face the challenge in their digital '
-              'transformation journey. Our expertise is in working directly '
-              'with our client as an extension of their team to support rapid '
-              'growth and help bring projects to life.',
+              AppLocalizations.of(context)!.servicesDescription,
               style: textTheme.titleLarge?.copyWith(
                 fontSize: isSmallScreen ? 16 : 18,
                 height: 1.6,
@@ -54,21 +51,30 @@ class ServicesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             _ServiceExpansionTile(
-              title: 'Software delivery',
+              title: AppLocalizations.of(context)!.serviceSoftwareDelivery,
               children: [
-                'Web',
-                'Mobile',
-                'Backend systems',
-                'Game',
+                AppLocalizations.of(context)!.serviceWeb,
+                AppLocalizations.of(context)!.serviceMobile,
+                AppLocalizations.of(context)!.serviceBackend,
+                AppLocalizations.of(context)!.serviceGame,
               ],
             ),
             _ServiceExpansionTile(
-              title: 'Team augmentation',
-              children: ['Tech-lead', 'Fullstack engineer', 'QA', 'UX/UI'],
+              title: AppLocalizations.of(context)!.serviceTeamAugmentation,
+              children: [
+                AppLocalizations.of(context)!.serviceTechLead,
+                AppLocalizations.of(context)!.serviceFullstack,
+                AppLocalizations.of(context)!.serviceQA,
+                AppLocalizations.of(context)!.serviceUXUI,
+              ],
             ),
             _ServiceExpansionTile(
-              title: 'Consultant',
-              children: ['Training', 'Adhoc support', 'On demand session'],
+              title: AppLocalizations.of(context)!.serviceConsultant,
+              children: [
+                AppLocalizations.of(context)!.serviceTraining,
+                AppLocalizations.of(context)!.serviceAdhocSupport,
+                AppLocalizations.of(context)!.serviceOnDemand
+              ],
             ),
           ],
         ),

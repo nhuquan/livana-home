@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:livana/l10n/app_localizations.dart';
 
 class OurWorkScreen extends StatelessWidget {
   const OurWorkScreen({super.key});
@@ -13,57 +14,57 @@ class OurWorkScreen extends StatelessWidget {
     final workItems = [
       {
         'title': 'Garage',
-        'description': 'Smart garage maintenance and vehicle tracking.',
+        'description': AppLocalizations.of(context)!.projectGarageDesc,
         'imagePath': 'assets/images/garage.png',
         'url': 'https://garage.livana.dev',
       },
       {
         'title': 'Focus Tracker',
-        'description': 'Track your focus time and build productive habits.',
+        'description': AppLocalizations.of(context)!.projectFocusTrackerDesc,
         'imagePath': 'assets/images/focusTracker.png',
         'url': 'https://focus.livana.dev/',
       },
       {
         'title': 'Engaged Buddhism',
-        'description': 'Buddhist teachings from Zen Master Thich Nhat Hanh',
+        'description': AppLocalizations.of(context)!.projectEngagedBuddhismDesc,
         'imagePath': 'assets/images/engaged_buddhism.png',
         'url': 'https://phapthoai.livana.dev',
       },
       {
         'title': 'Moon Calendar',
-        'description': 'Track moon phases and connect with lunar cycles.',
+        'description': AppLocalizations.of(context)!.projectMoonCalendarDesc,
         'imagePath': 'assets/images/moon_calendar.png',
         'url': 'https://moon.livana.dev',
       },
       {
         'title': 'DailyWisdom',
-        'description': 'Daily inspirational quotes to brighten your day.',
+        'description': AppLocalizations.of(context)!.projectDailyWisdomDesc,
         'imagePath': 'assets/images/dailyWisdom.png',
         'url':
             'https://play.google.com/store/apps/details?id=dev.livana.dailywisdom'
       },
       {
         'title': 'Sound Ground',
-        'description': 'Relax and focus with ambient sounds.',
+        'description': AppLocalizations.of(context)!.projectSoundGroundDesc,
         'imagePath': 'assets/images/soundGround.png',
         'url':
             'https://play.google.com/store/apps/details?id=dev.livana.soundground',
       },
       {
         'title': 'Flappy',
-        'description': 'A fun and addictive game to challenge your friends.',
+        'description': AppLocalizations.of(context)!.projectFlappyDesc,
         'imagePath': 'assets/images/flappy.png',
         'url': 'https://flappy.livana.dev/',
       },
       {
         'title': 'Star Hunter',
-        'description': 'Explore the universe and hunt for stars.',
+        'description': AppLocalizations.of(context)!.projectStarHunterDesc,
         'imagePath': 'assets/images/starHunter.png',
         'url': 'https://nhuquan.github.io/starHunter/',
       },
       {
         'title': 'Mai',
-        'description': 'Your personal AI companion for mental wellness.',
+        'description': AppLocalizations.of(context)!.projectMaiDesc,
         'imagePath': 'assets/images/mai.png',
         'url': 'https://mai.livana.dev/',
       },
@@ -84,7 +85,7 @@ class OurWorkScreen extends StatelessWidget {
                 if (isSmallScreen)
                   Text(
                     // Title only on small screens above cards
-                    'Our Work',
+                    AppLocalizations.of(context)!.ourWork,
                     style: textTheme.displayMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: isSmallScreen ? 36 : 48,
@@ -132,7 +133,7 @@ class OurWorkScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 Text(
-                  'Let\'s build something beautiful.',
+                  AppLocalizations.of(context)!.letsBuildSomething,
                   style: textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: isSmallScreen ? 18 : 32,
@@ -143,7 +144,7 @@ class OurWorkScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, '/contact');
                   },
-                  child: const Text('Contact Us'),
+                  child: Text(AppLocalizations.of(context)!.contactUsButton),
                 ),
 
               ],
