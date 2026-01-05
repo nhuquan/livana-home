@@ -21,7 +21,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get workWithUs => 'Liên Hệ';
 
   @override
-  String get homeSlogan => 'Nơi đổi mới phục vụ nhân sinh.';
+  String get homeSlogan => 'Sáng tạo vì con người.';
 
   @override
   String get homeValues =>

@@ -363,14 +363,16 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
           SizedBox(width: 10),
           TextButton(
             onPressed: () {
-              if (locale.languageCode == 'en') {
+              // Use context locale to toggle logic to ensure it's up to date with what's being displayed (even though logic is same)
+              final currentLocale = Localizations.localeOf(context);
+              if (currentLocale.languageCode == 'en') {
                 setLocale(const Locale('vi'));
               } else {
                 setLocale(const Locale('en'));
               }
             },
             child: Text(
-              locale.languageCode == 'en' ? '🇺🇸' : '🇻🇳',
+              Localizations.localeOf(context).languageCode == 'en' ? '🇺🇸' : '🇻🇳',
               style: TextStyle(
                 fontSize: 24,
               ),
