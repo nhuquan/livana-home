@@ -47,5 +47,7 @@
   "successMessage": "Thank you! Your message has been received.",
   "errorMessage": "An error occurred. Please check your connection and try again.",
   "submissionInProgress": "Submission in progress...",
-  "formError": "Please correct the errors in the form."
+  "formError": "Please correct the errors in the form.",
+  "apps": "Apps",
+  "games": "Games"
 }

@@ -391,6 +391,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please correct the errors in the form.'**
   String get formError;
+
+  /// No description provided for @apps.
+  ///
+  /// In en, this message translates to:
+  /// **'Apps'**
+  String get apps;
+
+  /// No description provided for @games.
+  ///
+  /// In en, this message translates to:
+  /// **'Games'**
+  String get games;
 }
 
 class _AppLocalizationsDelegate

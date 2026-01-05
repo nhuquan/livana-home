@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:livana/l10n/app_localizations.dart';
 
-class OurWorkScreen extends StatelessWidget {
+class OurWorkScreen extends StatefulWidget {
   const OurWorkScreen({super.key});
+
+  @override
+  State<OurWorkScreen> createState() => _OurWorkScreenState();
+}
+
+class _OurWorkScreenState extends State<OurWorkScreen> {
+  String _selectedCategory = 'app'; // 'app' or 'game'
 
   @override
   Widget build(BuildContext context) {
@@ -14,61 +21,72 @@ class OurWorkScreen extends StatelessWidget {
     final workItems = [
       {
         'title': 'Garage',
-        'description': AppLocalizations.of(context)!.projectGarageDesc,
+        'description': AppLocalizations.of(context).projectGarageDesc,
         'imagePath': 'assets/images/garage.png',
         'url': 'https://garage.livana.dev',
+        'type': 'app'
       },
       {
         'title': 'Focus Tracker',
-        'description': AppLocalizations.of(context)!.projectFocusTrackerDesc,
+        'description': AppLocalizations.of(context).projectFocusTrackerDesc,
         'imagePath': 'assets/images/focusTracker.png',
         'url': 'https://focus.livana.dev/',
+        'type': 'app'
       },
       {
         'title': 'Engaged Buddhism',
-        'description': AppLocalizations.of(context)!.projectEngagedBuddhismDesc,
+        'description': AppLocalizations.of(context).projectEngagedBuddhismDesc,
         'imagePath': 'assets/images/engaged_buddhism.png',
         'url': 'https://phapthoai.livana.dev',
+        'type': 'app'
       },
       {
         'title': 'Moon Calendar',
-        'description': AppLocalizations.of(context)!.projectMoonCalendarDesc,
+        'description': AppLocalizations.of(context).projectMoonCalendarDesc,
         'imagePath': 'assets/images/moon_calendar.png',
         'url': 'https://moon.livana.dev',
+        'type': 'app'
       },
       {
         'title': 'DailyWisdom',
-        'description': AppLocalizations.of(context)!.projectDailyWisdomDesc,
+        'description': AppLocalizations.of(context).projectDailyWisdomDesc,
         'imagePath': 'assets/images/dailyWisdom.png',
         'url':
-            'https://play.google.com/store/apps/details?id=dev.livana.dailywisdom'
+            'https://play.google.com/store/apps/details?id=dev.livana.dailywisdom',
+        'type': 'app'
       },
       {
         'title': 'Sound Ground',
-        'description': AppLocalizations.of(context)!.projectSoundGroundDesc,
+        'description': AppLocalizations.of(context).projectSoundGroundDesc,
         'imagePath': 'assets/images/soundGround.png',
         'url':
             'https://play.google.com/store/apps/details?id=dev.livana.soundground',
+        'type': 'app'
       },
       {
         'title': 'Flappy',
-        'description': AppLocalizations.of(context)!.projectFlappyDesc,
+        'description': AppLocalizations.of(context).projectFlappyDesc,
         'imagePath': 'assets/images/flappy.png',
         'url': 'https://flappy.livana.dev/',
+        'type': 'game'
       },
       {
         'title': 'Star Hunter',
-        'description': AppLocalizations.of(context)!.projectStarHunterDesc,
+        'description': AppLocalizations.of(context).projectStarHunterDesc,
         'imagePath': 'assets/images/starHunter.png',
         'url': 'https://nhuquan.github.io/starHunter/',
+        'type': 'game'
       },
       {
         'title': 'Mai',
-        'description': AppLocalizations.of(context)!.projectMaiDesc,
+        'description': AppLocalizations.of(context).projectMaiDesc,
         'imagePath': 'assets/images/mai.png',
         'url': 'https://mai.livana.dev/',
+        'type': 'app'
       },
     ];
+
+    final filteredItems = workItems.where((item) => item['type'] == _selectedCategory).toList();
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // Push CTA to bottom
@@ -92,6 +110,20 @@ class OurWorkScreen extends StatelessWidget {
                     ),
                   ),
                 if (isSmallScreen) const SizedBox(height: 30),
+                
+                // Tab Selection Logic
+                Container(
+                  margin: EdgeInsets.only(bottom: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      _buildTabButton(context, AppLocalizations.of(context)!.apps, 'app'),
+                      SizedBox(width: 20),
+                      _buildTabButton(context, AppLocalizations.of(context)!.games, 'game'),
+                    ],
+                  ),
+                ),
+
                 LayoutBuilder(
                   builder: (context, constraints) {
                     int crossAxisCount;
@@ -117,9 +149,9 @@ class OurWorkScreen extends StatelessWidget {
                         mainAxisSpacing: 16,
                         childAspectRatio: childAspectRatio,
                       ),
-                      itemCount: workItems.length,
+                      itemCount: filteredItems.length,
                       itemBuilder: (context, index) {
-                        final item = workItems[index];
+                        final item = filteredItems[index];
                         return _WorkItemCard(
                           title: item['title']!,
                           description: item['description']!,
@@ -152,6 +184,46 @@ class OurWorkScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildTabButton(BuildContext context, String title, String key) {
+    final bool isSelected = _selectedCategory == key;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final activeColor = isDarkMode ? Colors.white : Colors.black;
+    final inactiveColor = Colors.grey;
+
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _selectedCategory = key;
+        });
+      },
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              color: isSelected ? activeColor : inactiveColor,
+            ),
+          ),
+          SizedBox(height: 4),
+          if (isSelected)
+            Container(
+              height: 2,
+              width: 30, // Fixed width underline
+              color: activeColor,
+            )
+          else
+             Container(
+              height: 2,
+              width: 30, // Fixed width underline
+              color: Colors.transparent,
+            ),
+        ],
+      ),
     );
   }
 }

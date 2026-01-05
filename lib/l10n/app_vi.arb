@@ -5,9 +5,9 @@
   "workWithUs": "Liên Hệ",
   "homeSlogan": "Nơi đổi mới phục vụ nhân sinh.",
   "homeValues": "Đức Phật dạy rằng thành công thực sự đến từ việc kiếm sống một cách lương thiện, an lạc và không làm hại người khác.\n\nTại Livana Software, chúng tôi hiểu rằng trong thế giới hiện đại, công nghệ thường bị chi phối bởi tiền bạc. Mặc dù tiền bạc là quan trọng, nhưng nó không nên là động lực duy nhất. Do đó, chúng tôi đã chủ động chọn tập trung thời gian và năng lượng vào việc xây dựng những thứ thực sự có ý nghĩa. Mục tiêu của chúng tôi là tạo ra các sản phẩm và dịch vụ có tác động tích cực và ý nghĩa đối với cuộc sống con người và xã hội. Chúng tôi tin rằng giá trị thực sự được tạo ra từ những việc làm thiện lành và chúng tôi được đền đáp xứng đáng chỉ bằng việc thực hiện chúng.",
-  "chatWithUs": "Trò chuyện",
+  "chatWithUs": "Liên hệ",
   "contactNumberSnackBar": "SMS / Zalo / Whatsapp: (+84) 981-682-904",
-  "servicesDescription": "Livana là công ty phần mềm cung cấp dịch vụ toàn diện giúp các công ty đối mặt với thách thức trong hành trình chuyển đổi số. Chuyên môn của chúng tôi là làm việc trực tiếp với khách hàng như một phần mở rộng của đội ngũ họ để hỗ trợ tăng trưởng nhanh chóng và giúp hiện thực hóa các dự án.",
+  "servicesDescription": "Livana là công ty phần mềm cung cấp dịch vụ toàn diện giúp các công ty đối mặt với thách thức trong hành trình chuyển đổi số. Chuyên môn của chúng tôi là làm việc trực tiếp với khách hàng như một phần mở rộng để hỗ trợ tăng trưởng nhanh chóng và giúp hiện thực hóa các dự án phức tạp.",
   "serviceSoftwareDelivery": "Phát triển phần mềm",
   "serviceMobile": "Mobile",
   "serviceWeb": "Web",
@@ -47,5 +47,7 @@
   "successMessage": "Cảm ơn! Tin nhắn của bạn đã được nhận.",
   "errorMessage": "Đã xảy ra lỗi. Vui lòng kiểm tra kết nối và thử lại.",
   "submissionInProgress": "Đang trong quá trình gửi...",
-  "formError": "Vui lòng sửa các lỗi trong biểu mẫu."
+  "formError": "Vui lòng sửa các lỗi trong biểu mẫu.",
+  "apps": "Ứng dụng",
+  "games": "Trò chơi"
 }

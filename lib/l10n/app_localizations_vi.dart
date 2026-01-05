@@ -15,7 +15,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get ourServices => 'Dịch Vụ';
 
   @override
-  String get ourWork => 'Dự Án';
+  String get ourWork => 'Sản phẩm';
 
   @override
   String get workWithUs => 'Liên Hệ';
@@ -28,7 +28,7 @@ class AppLocalizationsVi extends AppLocalizations {
       'Đức Phật dạy rằng thành công thực sự đến từ việc kiếm sống một cách lương thiện, an lạc và không làm hại người khác.\n\nTại Livana Software, chúng tôi hiểu rằng trong thế giới hiện đại, công nghệ thường bị chi phối bởi tiền bạc. Mặc dù tiền bạc là quan trọng, nhưng nó không nên là động lực duy nhất. Do đó, chúng tôi đã chủ động chọn tập trung thời gian và năng lượng vào việc xây dựng những thứ thực sự có ý nghĩa. Mục tiêu của chúng tôi là tạo ra các sản phẩm và dịch vụ có tác động tích cực và ý nghĩa đối với cuộc sống con người và xã hội. Chúng tôi tin rằng giá trị thực sự được tạo ra từ những việc làm thiện lành và chúng tôi được đền đáp xứng đáng chỉ bằng việc thực hiện chúng.';
 
   @override
-  String get chatWithUs => 'Trò chuyện';
+  String get chatWithUs => 'Liên hệ';
 
   @override
   String get contactNumberSnackBar =>
@@ -36,7 +36,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get servicesDescription =>
-      'Livana là công ty phần mềm cung cấp dịch vụ toàn diện giúp các công ty đối mặt với thách thức trong hành trình chuyển đổi số. Chuyên môn của chúng tôi là làm việc trực tiếp với khách hàng như một phần mở rộng của đội ngũ họ để hỗ trợ tăng trưởng nhanh chóng và giúp hiện thực hóa các dự án.';
+      'Livana là công ty phần mềm cung cấp dịch vụ toàn diện giúp các công ty đối mặt với thách thức trong hành trình chuyển đổi số. Chuyên môn của chúng tôi là làm việc trực tiếp với khách hàng như một phần mở rộng để hỗ trợ tăng trưởng nhanh chóng và giúp hiện thực hóa các dự án phức tạp.';
 
   @override
   String get serviceSoftwareDelivery => 'Phát triển phần mềm';
@@ -115,7 +115,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get projectMaiDesc => 'Người bạn đồng hành AI cho sức khỏe tinh thần.';
 
   @override
-  String get letsBuildSomething => 'Hãy cùng xây dựng những điều tuyệt vời.';
+  String get letsBuildSomething => 'Hãy cùng xây dựng một phần mềm thú vị.';
 
   @override
   String get contactUsButton => 'Liên hệ ngay';
@@ -166,4 +166,10 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get formError => 'Vui lòng sửa các lỗi trong biểu mẫu.';
+
+  @override
+  String get apps => 'Ứng dụng';
+
+  @override
+  String get games => 'Trò chơi';
 }

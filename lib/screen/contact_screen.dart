@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:livana/l10n/app_localizations.dart';
 
 import '../main.dart'; // For color constants
@@ -41,20 +43,21 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
       );
 
       try {
-        // Data to insert
-        final Map<String, dynamic> formData = {
-          'first_name': _firstNameController.text,
-          'last_name': _lastNameController.text,
-          'email': _emailController.text,
-          'subject': _subjectController.text,
-          'message': _messageController.text,
-          // 'ip_address': null, // You could try to get this if needed, but it's trickier from client-side
-          // 'user_agent': null, // Same as above
-        };
+        const String formEndpoint = 'https://formspree.io/f/mrebjljk';
+        final response = await http.post(
+          Uri.parse(formEndpoint),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'name': '${_lastNameController.text} ${_firstNameController.text}'.trim(), // Formspree prefers 'name'
+            'email': _emailController.text,
+            'subject': _subjectController.text,
+            'message': _messageController.text,
+          }),
+        );
 
-        // Insert data into Supabase
-        // 'contact_messages' should match your table name in Supabase
-        await supabase.from('contact_messages').insert(formData);
+        if (response.statusCode != 200) {
+          throw Exception('Failed to send message');
+        }
 
         // Success
         ScaffoldMessenger.of(context).showSnackBar(

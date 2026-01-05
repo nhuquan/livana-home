@@ -167,4 +167,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get formError => 'Please correct the errors in the form.';
+
+  @override
+  String get apps => 'Apps';
+
+  @override
+  String get games => 'Games';
 }
