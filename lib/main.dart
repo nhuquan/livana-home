@@ -5,6 +5,11 @@ import 'package:livana/screen/home_screen.dart';
 import 'package:livana/screen/product_screen.dart';
 import 'package:livana/screen/services_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:ui' as ui;
+
+import 'l10n/app_localizations.dart';
 
 const String supabaseUrl =
     'https://xykmitvmzjofzdvmhnui.supabase.co'; // Replace with your actual Supabase URL
@@ -52,6 +57,43 @@ class ThemeSwitcherWidget extends StatefulWidget {
 
 class _ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget> {
   ThemeMode _themeMode = ThemeMode.light;
+  Locale? _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLocale();
+  }
+
+  Future<void> _loadLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? languageCode = prefs.getString('languageCode');
+
+    if (languageCode != null) {
+      if (mounted) {
+        setState(() {
+          _locale = Locale(languageCode);
+        });
+      }
+    } else {
+      // Detect system locale
+      final platformLocale = ui.PlatformDispatcher.instance.locale;
+      if (platformLocale.languageCode == 'vi' ||
+          platformLocale.countryCode == 'VN') {
+        if (mounted) {
+          setState(() {
+            _locale = const Locale('vi');
+          });
+        }
+      } else {
+        if (mounted) {
+          setState(() {
+            _locale = const Locale('en');
+          });
+        }
+      }
+    }
+  }
 
   void _toggleTheme() {
     setState(() {
@@ -60,11 +102,21 @@ class _ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget> {
     });
   }
 
+  void _setLocale(Locale locale) async {
+    setState(() {
+      _locale = locale;
+    });
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('languageCode', locale.languageCode);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MyApp(
       themeMode: _themeMode,
       toggleTheme: _toggleTheme,
+      locale: _locale ?? const Locale('en'),
+      setLocale: _setLocale,
     );
   }
 }
@@ -73,8 +125,16 @@ class _ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget> {
 class MyApp extends StatelessWidget {
   final ThemeMode themeMode;
   final VoidCallback toggleTheme;
+  final Locale locale;
+  final Function(Locale) setLocale;
 
-  const MyApp({super.key, required this.themeMode, required this.toggleTheme});
+  const MyApp({
+    super.key,
+    required this.themeMode,
+    required this.toggleTheme,
+    required this.locale,
+    required this.setLocale,
+  });
 
 
   @override
@@ -154,22 +214,35 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeMode,
+      locale: locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: '/',
       routes: {
         '/': (context) => MainScreenScaffold(
-            body: HomeScreen(), currentRoute: '/', toggleTheme: toggleTheme),
+            body: HomeScreen(),
+            currentRoute: '/',
+            toggleTheme: toggleTheme,
+            locale: locale,
+            setLocale: setLocale),
         '/services': (context) => MainScreenScaffold(
             body: ServicesScreen(),
             currentRoute: '/services',
-            toggleTheme: toggleTheme),
+            toggleTheme: toggleTheme,
+            locale: locale,
+            setLocale: setLocale),
         '/product': (context) => MainScreenScaffold(
             body: OurWorkScreen(),
             currentRoute: '/product',
-            toggleTheme: toggleTheme),
+            toggleTheme: toggleTheme,
+            locale: locale,
+            setLocale: setLocale),
         '/contact': (context) => MainScreenScaffold(
             body: ContactFormScreen(),
             currentRoute: '/contact',
-            toggleTheme: toggleTheme),
+            toggleTheme: toggleTheme,
+            locale: locale,
+            setLocale: setLocale),
       },
     );
   }
@@ -179,16 +252,26 @@ class MainScreenScaffold extends StatelessWidget {
   final Widget body;
   final String currentRoute;
   final VoidCallback toggleTheme;
-  const MainScreenScaffold(
-      {super.key,
-        required this.body,
-        required this.currentRoute,
-        required this.toggleTheme});
+  final Locale locale;
+  final Function(Locale) setLocale;
+
+  const MainScreenScaffold({
+    super.key,
+    required this.body,
+    required this.currentRoute,
+    required this.toggleTheme,
+    required this.locale,
+    required this.setLocale,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar:
-    ResponsiveAppBar(currentRoute: currentRoute, toggleTheme: toggleTheme),
+    return Scaffold(
+      appBar: ResponsiveAppBar(
+          currentRoute: currentRoute,
+          toggleTheme: toggleTheme,
+          locale: locale,
+          setLocale: setLocale),
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 2000),
@@ -205,9 +288,16 @@ class MainScreenScaffold extends StatelessWidget {
 class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String currentRoute;
   final VoidCallback toggleTheme;
+  final Locale locale;
+  final Function(Locale) setLocale;
 
-  const ResponsiveAppBar(
-      {super.key, required this.currentRoute, required this.toggleTheme});
+  const ResponsiveAppBar({
+    super.key,
+    required this.currentRoute,
+    required this.toggleTheme,
+    required this.locale,
+    required this.setLocale,
+  });
 
   Widget _navItem(BuildContext context, String title, String routeName) {
     final bool isActive = currentRoute == routeName;
@@ -271,16 +361,33 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         actions: <Widget>[
           if (isDesktop) ...[
-            _navItem(context, 'Home', '/'),
-            _navItem(context, 'Our Services', '/services'),
-            _navItem(context, 'Our Work', '/product'),
-            _navItem(context, 'Work With Us', '/contact'),
+            _navItem(context, AppLocalizations.of(context)!.home, '/'),
+            _navItem(context, AppLocalizations.of(context)!.ourServices, '/services'),
+            _navItem(context, AppLocalizations.of(context)!.ourWork, '/product'),
+            _navItem(context, AppLocalizations.of(context)!.workWithUs, '/contact'),
           ],
           IconButton(
             icon: Icon(
               isDarkMode ? Icons.light_mode : Icons.dark_mode,
             ),
             onPressed: toggleTheme,
+          ),
+          SizedBox(width: 10),
+          TextButton(
+            onPressed: () {
+              if (locale.languageCode == 'en') {
+                setLocale(const Locale('vi'));
+              } else {
+                setLocale(const Locale('en'));
+              }
+            },
+            child: Text(
+              locale.languageCode == 'en' ? 'EN' : 'VN',
+              style: TextStyle(
+                color: textColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           if (!isDesktop)
             IconButton(
@@ -368,10 +475,10 @@ class FullScreenMenu extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _menuLink(context, 'Home', '/'),
-            _menuLink(context, 'Our Services', '/services'),
-            _menuLink(context, 'Our Work', '/product'),
-            _menuLink(context, 'Work With Us', '/contact'),
+            _menuLink(context, AppLocalizations.of(context)!.home, '/'),
+            _menuLink(context, AppLocalizations.of(context)!.ourServices, '/services'),
+            _menuLink(context, AppLocalizations.of(context)!.ourWork, '/product'),
+            _menuLink(context, AppLocalizations.of(context)!.workWithUs, '/contact'),
           ],
         ),
       ),
