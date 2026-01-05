@@ -20,7 +20,7 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
     // Sample data for work items
     final workItems = [
       {
-        'title': 'Garage',
+        'title': 'Garage DIY',
         'description': AppLocalizations.of(context).projectGarageDesc,
         'imagePath': 'assets/images/garage.png',
         'url': 'https://garage.livana.dev',
@@ -34,7 +34,7 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
         'type': 'app'
       },
       {
-        'title': 'Engaged Buddhism',
+        'title': 'Dharma Talk',
         'description': AppLocalizations.of(context).projectEngagedBuddhismDesc,
         'imagePath': 'assets/images/engaged_buddhism.png',
         'url': 'https://phapthoai.livana.dev',
@@ -48,7 +48,7 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
         'type': 'app'
       },
       {
-        'title': 'DailyWisdom',
+        'title': 'Daily Wisdom',
         'description': AppLocalizations.of(context).projectDailyWisdomDesc,
         'imagePath': 'assets/images/dailyWisdom.png',
         'url':
@@ -64,7 +64,7 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
         'type': 'app'
       },
       {
-        'title': 'Flappy',
+        'title': 'Flappy Bird Clone',
         'description': AppLocalizations.of(context).projectFlappyDesc,
         'imagePath': 'assets/images/flappy.png',
         'url': 'https://flappy.livana.dev/',

@@ -86612,25 +86612,25 @@ A.Xb.prototype={
 V(a){var s,r,q,p,o,n,m,l,k,j,i,h=null,g=A.V(a).ok,f=A.bE(a,h,t.l).w.a.a<768,e=t.R,d=A.aU(a,B.x,e)
 d.toString
 s=t.N
-d=A.aj(["title","Garage","description",d.gWS(),"imagePath","assets/images/garage.png","url","https://garage.livana.dev","type","app"],s,s)
+d=A.aj(["title","Garage DIY","description",d.gWS(),"imagePath","assets/images/garage.png","url","https://garage.livana.dev","type","app"],s,s)
 r=A.aU(a,B.x,e)
 r.toString
 r=A.aj(["title","Focus Tracker","description",r.gWR(),"imagePath","assets/images/focusTracker.png","url","https://focus.livana.dev/","type","app"],s,s)
 q=A.aU(a,B.x,e)
 q.toString
-q=A.aj(["title","Engaged Buddhism","description",q.gWP(),"imagePath","assets/images/engaged_buddhism.png","url","https://phapthoai.livana.dev","type","app"],s,s)
+q=A.aj(["title","Dharma Talk","description",q.gWP(),"imagePath","assets/images/engaged_buddhism.png","url","https://phapthoai.livana.dev","type","app"],s,s)
 p=A.aU(a,B.x,e)
 p.toString
 p=A.aj(["title","Moon Calendar","description",p.gWU(),"imagePath","assets/images/moon_calendar.png","url","https://moon.livana.dev","type","app"],s,s)
 o=A.aU(a,B.x,e)
 o.toString
-o=A.aj(["title","DailyWisdom","description",o.gWO(),"imagePath","assets/images/dailyWisdom.png","url","https://play.google.com/store/apps/details?id=dev.livana.dailywisdom","type","app"],s,s)
+o=A.aj(["title","Daily Wisdom","description",o.gWO(),"imagePath","assets/images/dailyWisdom.png","url","https://play.google.com/store/apps/details?id=dev.livana.dailywisdom","type","app"],s,s)
 n=A.aU(a,B.x,e)
 n.toString
 n=A.aj(["title","Sound Ground","description",n.gWV(),"imagePath","assets/images/soundGround.png","url","https://play.google.com/store/apps/details?id=dev.livana.soundground","type","app"],s,s)
 m=A.aU(a,B.x,e)
 m.toString
-m=A.aj(["title","Flappy","description",m.gWQ(),"imagePath","assets/images/flappy.png","url","https://flappy.livana.dev/","type","game"],s,s)
+m=A.aj(["title","Flappy Bird Clone","description",m.gWQ(),"imagePath","assets/images/flappy.png","url","https://flappy.livana.dev/","type","game"],s,s)
 l=A.aU(a,B.x,e)
 l.toString
 l=A.aj(["title","Star Hunter","description",l.gWW(),"imagePath","assets/images/starHunter.png","url","https://nhuquan.github.io/starHunter/","type","game"],s,s)
