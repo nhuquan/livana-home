@@ -34,7 +34,7 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    const serviceWorkerVersion = "3008909611";
+    const serviceWorkerVersion = "1029082908";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
@@ -92,6 +92,12 @@
 <!--      }-->
 <!--    }-->
 <!--  </script>-->
+
+  <script type="module">
+    import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights/+esm';
+
+    injectSpeedInsights();
+  </script>
 </head>
 <body>
   <script>
