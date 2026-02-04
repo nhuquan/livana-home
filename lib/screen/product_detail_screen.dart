@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:livana/model/product.dart';
-import 'package:livana/screen/privacy_policy_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -120,12 +119,7 @@ class ProductDetailScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PrivacyPolicyScreen(product: product),
-            ),
-          );
+          Navigator.pushNamed(context, '/products/${product.id}/privacy');
         },
         child: const Text('Privacy Policy'),
       ),

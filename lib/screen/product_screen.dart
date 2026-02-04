@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:livana/data/products.dart';
 import 'package:livana/l10n/app_localizations.dart';
 import 'package:livana/model/product.dart';
-import 'package:livana/screen/product_detail_screen.dart';
 
 class OurWorkScreen extends StatefulWidget {
   const OurWorkScreen({super.key});
@@ -18,77 +18,8 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
     final textTheme = Theme.of(context).textTheme;
     bool isSmallScreen = MediaQuery.of(context).size.width < 768;
 
-    // Sample data for work items
-    final workItems = [
-      Product(
-        title: 'Garage DIY',
-        description: AppLocalizations.of(context).projectGarageDesc,
-        imagePath: 'assets/images/garage.png',
-        url: 'https://garage.livana.dev',
-        type: 'app',
-      ),
-      Product(
-        title: 'Focus Tracker',
-        description: AppLocalizations.of(context).projectFocusTrackerDesc,
-        imagePath: 'assets/images/focusTracker.png',
-        url: 'https://focus.livana.dev/',
-        type: 'app',
-      ),
-      Product(
-        title: 'Pháp Thoại Sư Ông',
-        description: AppLocalizations.of(context).projectEngagedBuddhismDesc,
-        imagePath: 'assets/images/engaged_buddhism.png',
-        url: 'https://phapthoai.livana.dev',
-        type: 'app',
-      ),
-      Product(
-        title: 'Moon Calendar',
-        description: AppLocalizations.of(context).projectMoonCalendarDesc,
-        imagePath: 'assets/images/moon_calendar.png',
-        url: 'https://moon.livana.dev',
-        type: 'app',
-      ),
-      Product(
-        title: 'Daily Wisdom',
-        description: AppLocalizations.of(context).projectDailyWisdomDesc,
-        imagePath: 'assets/images/dailyWisdom.png',
-        androidUrl:
-            'https://play.google.com/store/apps/details?id=dev.livana.dailywisdom',
-        type: 'app',
-      ),
-      Product(
-        title: 'Sound Ground',
-        description: AppLocalizations.of(context).projectSoundGroundDesc,
-        imagePath: 'assets/images/soundGround.png',
-        androidUrl:
-            'https://play.google.com/store/apps/details?id=dev.livana.soundground',
-        type: 'app',
-      ),
-      Product(
-        title: 'Flappy Bird Clone',
-        description: AppLocalizations.of(context).projectFlappyDesc,
-        imagePath: 'assets/images/flappy.png',
-        url: 'https://flappy.livana.dev/',
-        type: 'game',
-      ),
-      Product(
-        title: 'Star Hunter',
-        description: AppLocalizations.of(context).projectStarHunterDesc,
-        imagePath: 'assets/images/starHunter.png',
-        url: 'https://nhuquan.github.io/starHunter/',
-        type: 'game',
-      ),
-      Product(
-        title: 'Mai',
-        description: AppLocalizations.of(context).projectMaiDesc,
-        imagePath: 'assets/images/mai.png',
-        url: 'https://mai.livana.dev/',
-        type: 'app',
-      ),
-    ];
-
     final filteredItems =
-        workItems.where((item) => item.type == _selectedCategory).toList();
+        allProducts.where((item) => item.type == _selectedCategory).toList();
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // Push CTA to bottom
@@ -246,12 +177,7 @@ class _WorkItemCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProductDetailScreen(product: product),
-            ),
-          );
+          Navigator.pushNamed(context, '/products/${product.id}');
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -291,8 +217,9 @@ class _WorkItemCard extends StatelessWidget {
                         product.title,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize:
-                              isSmall ? 15 : 18, // Slightly smaller text on mobile
+                          fontSize: isSmall
+                              ? 15
+                              : 18, // Slightly smaller text on mobile
                           fontWeight: FontWeight.bold,
                         ),
                         maxLines: 2, // Allow title to wrap

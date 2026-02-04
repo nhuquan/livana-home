@@ -1,11 +1,16 @@
+import 'dart:ui' as ui;
+import 'dart:ui_web';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:livana/data/products.dart';
 import 'package:livana/screen/contact_screen.dart';
 import 'package:livana/screen/home_screen.dart';
+import 'package:livana/screen/privacy_policy_screen.dart';
+import 'package:livana/screen/product_detail_screen.dart';
 import 'package:livana/screen/product_screen.dart';
 import 'package:livana/screen/services_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:ui' as ui;
 
 import 'l10n/app_localizations.dart';
 
@@ -13,8 +18,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ThemeSwitcherWidget());
 }
-
-
 
 // Define your accent color
 const Color kAccentColor = Color(0xFFFFA500); // Example orange
@@ -31,7 +34,7 @@ const Color kDarkButtonBackgroundColor = Colors.white;
 const Color kDarkButtonTextColor = Colors.black;
 
 const Color kFormFieldBackgroundColor =
-Color(0xFFF0F0F0); // Light grey for form fields
+    Color(0xFFF0F0F0); // Light grey for form fields
 const Color kFormFieldTextColor = Colors.black;
 const Color kButtonBackgroundColor = Colors.white;
 const Color kButtonTextColor = Colors.black;
@@ -86,7 +89,7 @@ class _ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget> {
   void _toggleTheme() {
     setState(() {
       _themeMode =
-      _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+          _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
     });
   }
 
@@ -109,7 +112,6 @@ class _ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget> {
   }
 }
 
-
 class MyApp extends StatelessWidget {
   final ThemeMode themeMode;
   final VoidCallback toggleTheme;
@@ -124,10 +126,8 @@ class MyApp extends StatelessWidget {
     required this.setLocale,
   });
 
-
   @override
   Widget build(BuildContext context) {
-
     final lightTheme = ThemeData(
       brightness: Brightness.light,
       primaryColor: kAccentColor,
@@ -140,7 +140,7 @@ class MyApp extends StatelessWidget {
         style: TextButton.styleFrom(
             foregroundColor: kLightTextColor,
             textStyle:
-            const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -152,7 +152,7 @@ class MyApp extends StatelessWidget {
           ),
           textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
         ),
       ),
       dividerColor: Colors.grey[300],
@@ -174,7 +174,7 @@ class MyApp extends StatelessWidget {
         style: TextButton.styleFrom(
             foregroundColor: kDarkTextColor,
             textStyle:
-            const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -186,7 +186,7 @@ class MyApp extends StatelessWidget {
           ),
           textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
         ),
       ),
       dividerColor: Colors.grey[800],
@@ -195,7 +195,6 @@ class MyApp extends StatelessWidget {
         iconTheme: IconThemeData(color: kDarkTextColor),
       ),
     );
-
 
     return MaterialApp(
       title: 'Livana Software',
@@ -206,31 +205,63 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: '/',
-      routes: {
-        '/': (context) => MainScreenScaffold(
-            body: HomeScreen(),
-            currentRoute: '/',
+      onGenerateRoute: (settings) {
+        final uri = Uri.parse(settings.name ?? '/');
+        final pathSegments = uri.pathSegments;
+
+        if (pathSegments.isNotEmpty && pathSegments.first == 'products') {
+          if (pathSegments.length == 2) {
+            final productId = pathSegments[1];
+            final product = allProducts.firstWhere(
+              (p) => p.id == productId,
+              orElse: () => allProducts.first,
+            );
+            return MaterialPageRoute(
+              builder: (context) => ProductDetailScreen(product: product),
+            );
+          } else if (pathSegments.length == 3 && pathSegments[2] == 'privacy') {
+            final productId = pathSegments[1];
+            final product = allProducts.firstWhere(
+              (p) => p.id == productId,
+              orElse: () => allProducts.first,
+            );
+            return MaterialPageRoute(
+              builder: (context) => PrivacyPolicyScreen(product: product),
+            );
+          }
+        }
+
+        Widget body;
+        String currentRoute = settings.name ?? '/';
+
+        switch (currentRoute) {
+          case '/services':
+            body = ServicesScreen();
+            break;
+          case '/product':
+            body = OurWorkScreen();
+            break;
+          case '/contact':
+            body = ContactFormScreen();
+            break;
+          case '/':
+            body = HomeScreen();
+            break;
+          default:
+            body = HomeScreen();
+            currentRoute = '/';
+            break;
+        }
+
+        return MaterialPageRoute(
+          builder: (context) => MainScreenScaffold(
+            body: body,
+            currentRoute: currentRoute,
             toggleTheme: toggleTheme,
             locale: locale,
-            setLocale: setLocale),
-        '/services': (context) => MainScreenScaffold(
-            body: ServicesScreen(),
-            currentRoute: '/services',
-            toggleTheme: toggleTheme,
-            locale: locale,
-            setLocale: setLocale),
-        '/product': (context) => MainScreenScaffold(
-            body: OurWorkScreen(),
-            currentRoute: '/product',
-            toggleTheme: toggleTheme,
-            locale: locale,
-            setLocale: setLocale),
-        '/contact': (context) => MainScreenScaffold(
-            body: ContactFormScreen(),
-            currentRoute: '/contact',
-            toggleTheme: toggleTheme,
-            locale: locale,
-            setLocale: setLocale),
+            setLocale: setLocale,
+          ),
+        );
       },
     );
   }
@@ -343,16 +374,17 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           child: Text('Livana',
               style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: textColor)),
+                  fontSize: 24, fontWeight: FontWeight.bold, color: textColor)),
         ),
         actions: <Widget>[
           if (isDesktop) ...[
             _navItem(context, AppLocalizations.of(context)!.home, '/'),
-            _navItem(context, AppLocalizations.of(context)!.ourServices, '/services'),
-            _navItem(context, AppLocalizations.of(context)!.ourWork, '/product'),
-            _navItem(context, AppLocalizations.of(context)!.workWithUs, '/contact'),
+            _navItem(context, AppLocalizations.of(context)!.ourServices,
+                '/services'),
+            _navItem(
+                context, AppLocalizations.of(context)!.ourWork, '/product'),
+            _navItem(
+                context, AppLocalizations.of(context)!.workWithUs, '/contact'),
           ],
           IconButton(
             icon: Icon(
@@ -372,7 +404,9 @@ class ResponsiveAppBar extends StatelessWidget implements PreferredSizeWidget {
               }
             },
             child: Text(
-              Localizations.localeOf(context).languageCode == 'en' ? '🇺🇸' : '🇻🇳',
+              Localizations.localeOf(context).languageCode == 'en'
+                  ? '🇺🇸'
+                  : '🇻🇳',
               style: TextStyle(
                 fontSize: 24,
               ),
@@ -420,7 +454,9 @@ class FullScreenMenu extends StatelessWidget {
   Widget _menuLink(BuildContext context, String title, String routeName) {
     final bool isActive = currentRoute == routeName;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final activeColor = isDarkMode ? kDarkTextColor.withOpacity(0.7) : kLightTextColor.withOpacity(0.7);
+    final activeColor = isDarkMode
+        ? kDarkTextColor.withOpacity(0.7)
+        : kLightTextColor.withOpacity(0.7);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -444,7 +480,9 @@ class FullScreenMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDarkMode ? kDarkBackgroundColor.withOpacity(0.98) : kLightBackgroundColor.withOpacity(0.98);
+    final backgroundColor = isDarkMode
+        ? kDarkBackgroundColor.withOpacity(0.98)
+        : kLightBackgroundColor.withOpacity(0.98);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -465,9 +503,12 @@ class FullScreenMenu extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             _menuLink(context, AppLocalizations.of(context)!.home, '/'),
-            _menuLink(context, AppLocalizations.of(context)!.ourServices, '/services'),
-            _menuLink(context, AppLocalizations.of(context)!.ourWork, '/product'),
-            _menuLink(context, AppLocalizations.of(context)!.workWithUs, '/contact'),
+            _menuLink(context, AppLocalizations.of(context)!.ourServices,
+                '/services'),
+            _menuLink(
+                context, AppLocalizations.of(context)!.ourWork, '/product'),
+            _menuLink(
+                context, AppLocalizations.of(context)!.workWithUs, '/contact'),
           ],
         ),
       ),
