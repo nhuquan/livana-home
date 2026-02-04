@@ -90,7 +90,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get projectEngagedBuddhismDesc =>
-      'Lời dạy Phật giáo từ Thiền sư Thích Nhất Hạnh';
+      'Pháp thoại của các Thiền sư Việt Nam và quốc tế';
 
   @override
   String get projectMoonCalendarDesc =>

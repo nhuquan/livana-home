@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:livana/l10n/app_localizations.dart';
+import 'package:livana/model/product.dart';
+import 'package:livana/screen/product_detail_screen.dart';
 
 class OurWorkScreen extends StatefulWidget {
   const OurWorkScreen({super.key});
@@ -19,74 +20,75 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
 
     // Sample data for work items
     final workItems = [
-      {
-        'title': 'Garage DIY',
-        'description': AppLocalizations.of(context).projectGarageDesc,
-        'imagePath': 'assets/images/garage.png',
-        'url': 'https://garage.livana.dev',
-        'type': 'app'
-      },
-      {
-        'title': 'Focus Tracker',
-        'description': AppLocalizations.of(context).projectFocusTrackerDesc,
-        'imagePath': 'assets/images/focusTracker.png',
-        'url': 'https://focus.livana.dev/',
-        'type': 'app'
-      },
-      {
-        'title': 'Dharma Talk',
-        'description': AppLocalizations.of(context).projectEngagedBuddhismDesc,
-        'imagePath': 'assets/images/engaged_buddhism.png',
-        'url': 'https://phapthoai.livana.dev',
-        'type': 'app'
-      },
-      {
-        'title': 'Moon Calendar',
-        'description': AppLocalizations.of(context).projectMoonCalendarDesc,
-        'imagePath': 'assets/images/moon_calendar.png',
-        'url': 'https://moon.livana.dev',
-        'type': 'app'
-      },
-      {
-        'title': 'Daily Wisdom',
-        'description': AppLocalizations.of(context).projectDailyWisdomDesc,
-        'imagePath': 'assets/images/dailyWisdom.png',
-        'url':
+      Product(
+        title: 'Garage DIY',
+        description: AppLocalizations.of(context).projectGarageDesc,
+        imagePath: 'assets/images/garage.png',
+        url: 'https://garage.livana.dev',
+        type: 'app',
+      ),
+      Product(
+        title: 'Focus Tracker',
+        description: AppLocalizations.of(context).projectFocusTrackerDesc,
+        imagePath: 'assets/images/focusTracker.png',
+        url: 'https://focus.livana.dev/',
+        type: 'app',
+      ),
+      Product(
+        title: 'Pháp Thoại Sư Ông',
+        description: AppLocalizations.of(context).projectEngagedBuddhismDesc,
+        imagePath: 'assets/images/engaged_buddhism.png',
+        url: 'https://phapthoai.livana.dev',
+        type: 'app',
+      ),
+      Product(
+        title: 'Moon Calendar',
+        description: AppLocalizations.of(context).projectMoonCalendarDesc,
+        imagePath: 'assets/images/moon_calendar.png',
+        url: 'https://moon.livana.dev',
+        type: 'app',
+      ),
+      Product(
+        title: 'Daily Wisdom',
+        description: AppLocalizations.of(context).projectDailyWisdomDesc,
+        imagePath: 'assets/images/dailyWisdom.png',
+        androidUrl:
             'https://play.google.com/store/apps/details?id=dev.livana.dailywisdom',
-        'type': 'app'
-      },
-      {
-        'title': 'Sound Ground',
-        'description': AppLocalizations.of(context).projectSoundGroundDesc,
-        'imagePath': 'assets/images/soundGround.png',
-        'url':
+        type: 'app',
+      ),
+      Product(
+        title: 'Sound Ground',
+        description: AppLocalizations.of(context).projectSoundGroundDesc,
+        imagePath: 'assets/images/soundGround.png',
+        androidUrl:
             'https://play.google.com/store/apps/details?id=dev.livana.soundground',
-        'type': 'app'
-      },
-      {
-        'title': 'Flappy Bird Clone',
-        'description': AppLocalizations.of(context).projectFlappyDesc,
-        'imagePath': 'assets/images/flappy.png',
-        'url': 'https://flappy.livana.dev/',
-        'type': 'game'
-      },
-      {
-        'title': 'Star Hunter',
-        'description': AppLocalizations.of(context).projectStarHunterDesc,
-        'imagePath': 'assets/images/starHunter.png',
-        'url': 'https://nhuquan.github.io/starHunter/',
-        'type': 'game'
-      },
-      {
-        'title': 'Mai',
-        'description': AppLocalizations.of(context).projectMaiDesc,
-        'imagePath': 'assets/images/mai.png',
-        'url': 'https://mai.livana.dev/',
-        'type': 'app'
-      },
+        type: 'app',
+      ),
+      Product(
+        title: 'Flappy Bird Clone',
+        description: AppLocalizations.of(context).projectFlappyDesc,
+        imagePath: 'assets/images/flappy.png',
+        url: 'https://flappy.livana.dev/',
+        type: 'game',
+      ),
+      Product(
+        title: 'Star Hunter',
+        description: AppLocalizations.of(context).projectStarHunterDesc,
+        imagePath: 'assets/images/starHunter.png',
+        url: 'https://nhuquan.github.io/starHunter/',
+        type: 'game',
+      ),
+      Product(
+        title: 'Mai',
+        description: AppLocalizations.of(context).projectMaiDesc,
+        imagePath: 'assets/images/mai.png',
+        url: 'https://mai.livana.dev/',
+        type: 'app',
+      ),
     ];
 
-    final filteredItems = workItems.where((item) => item['type'] == _selectedCategory).toList();
+    final filteredItems =
+        workItems.where((item) => item.type == _selectedCategory).toList();
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // Push CTA to bottom
@@ -110,16 +112,18 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
                     ),
                   ),
                 if (isSmallScreen) const SizedBox(height: 30),
-                
+
                 // Tab Selection Logic
                 Container(
-                  margin: EdgeInsets.only(bottom: 30),
+                  margin: const EdgeInsets.only(bottom: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      _buildTabButton(context, AppLocalizations.of(context)!.apps, 'app'),
-                      SizedBox(width: 20),
-                      _buildTabButton(context, AppLocalizations.of(context)!.games, 'game'),
+                      _buildTabButton(
+                          context, AppLocalizations.of(context)!.apps, 'app'),
+                      const SizedBox(width: 20),
+                      _buildTabButton(
+                          context, AppLocalizations.of(context)!.games, 'game'),
                     ],
                   ),
                 ),
@@ -128,10 +132,11 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
                   builder: (context, constraints) {
                     int crossAxisCount;
                     double childAspectRatio;
-                    
+
                     if (constraints.maxWidth < 600) {
                       crossAxisCount = 2; // Mobile
-                      childAspectRatio = 0.65; // Taller cards for mobile to avoid overflow
+                      childAspectRatio =
+                          0.65; // Taller cards for mobile to avoid overflow
                     } else if (constraints.maxWidth < 1200) {
                       crossAxisCount = 4; // Tablet
                       childAspectRatio = 0.70;
@@ -153,10 +158,7 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
                       itemBuilder: (context, index) {
                         final item = filteredItems[index];
                         return _WorkItemCard(
-                          title: item['title']!,
-                          description: item['description']!,
-                          imagePath: item['imagePath']!,
-                          url: item['url']!,
+                          product: item,
                           isSmall: constraints.maxWidth < 600,
                         );
                       },
@@ -178,7 +180,6 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
                   },
                   child: Text(AppLocalizations.of(context)!.contactUsButton),
                 ),
-
               ],
             ),
           ),
@@ -209,7 +210,7 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
               color: isSelected ? activeColor : inactiveColor,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           if (isSelected)
             Container(
               height: 2,
@@ -217,7 +218,7 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
               color: activeColor,
             )
           else
-             Container(
+            Container(
               height: 2,
               width: 30, // Fixed width underline
               color: Colors.transparent,
@@ -229,18 +230,12 @@ class _OurWorkScreenState extends State<OurWorkScreen> {
 }
 
 class _WorkItemCard extends StatelessWidget {
-  final String title;
-  final String description;
-  final String url;
-  final String imagePath;
+  final Product product;
   final bool isSmall;
 
   const _WorkItemCard({
-    required this.title,
-    required this.description,
-    required this.imagePath,
+    required this.product,
     this.isSmall = false,
-    required this.url,
   });
 
   @override
@@ -250,14 +245,13 @@ class _WorkItemCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
-        onTap: () async {
-          if (url == '#') return;
-          if (!await launchUrl(
-            Uri.parse(url),
-            mode: LaunchMode.externalApplication,
-          )) {
-            throw Exception('Could not launch $url');
-          }
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductDetailScreen(product: product),
+            ),
+          );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -267,13 +261,13 @@ class _WorkItemCard extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                   Container(
+                  Container(
                     color: Colors.grey[800],
                     alignment: Alignment.center,
                     child: Icon(Icons.image_outlined,
                         size: 50, color: Colors.grey[600]),
                   ),
-                  Image.asset(imagePath, fit: BoxFit.cover),
+                  Image.asset(product.imagePath, fit: BoxFit.cover),
                 ],
               ),
             ),
@@ -290,22 +284,25 @@ class _WorkItemCard extends StatelessWidget {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start, // Top align text
+                    mainAxisAlignment:
+                        MainAxisAlignment.start, // Top align text
                     children: [
                       Text(
-                        title,
+                        product.title,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: isSmall ? 15 : 18, // Slightly smaller text on mobile
+                          fontSize:
+                              isSmall ? 15 : 18, // Slightly smaller text on mobile
                           fontWeight: FontWeight.bold,
                         ),
                         maxLines: 2, // Allow title to wrap
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 4),
-                      Flexible( // Use Flexible instead of fixed height/text constraints
+                      Flexible(
+                        // Use Flexible instead of fixed height/text constraints
                         child: Text(
-                          description,
+                          product.description,
                           style: TextStyle(
                             color: Colors.grey[400],
                             fontSize: isSmall ? 11 : 12,
