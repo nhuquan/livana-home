@@ -123,7 +123,8 @@ class ProductDetailScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const PrivacyPolicyScreen()),
+              builder: (context) => PrivacyPolicyScreen(product: product),
+            ),
           );
         },
         child: const Text('Privacy Policy'),
