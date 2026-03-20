@@ -217,6 +217,7 @@ class MyApp extends StatelessWidget {
               orElse: () => allProducts.first,
             );
             return MaterialPageRoute(
+              settings: settings,
               builder: (context) => ProductDetailScreen(product: product),
             );
           } else if (pathSegments.length == 3 && pathSegments[2] == 'privacy') {
@@ -226,6 +227,7 @@ class MyApp extends StatelessWidget {
               orElse: () => allProducts.first,
             );
             return MaterialPageRoute(
+              settings: settings,
               builder: (context) => PrivacyPolicyScreen(product: product),
             );
           }
@@ -254,6 +256,7 @@ class MyApp extends StatelessWidget {
         }
 
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => MainScreenScaffold(
             body: body,
             currentRoute: currentRoute,
