@@ -3,8 +3,8 @@ import 'package:livana/model/product.dart';
 final allProducts = [
   Product(
     id: '1',
-    title: 'Garage DIY',
-    description: 'A DIY app for your garage.',
+    title: 'XeCare',
+    description: 'Repair and maintenance tracking',
     imagePath: 'assets/images/garage.png',
     url: 'https://garage.livana.dev',
     type: 'app',
