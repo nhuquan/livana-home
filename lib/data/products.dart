@@ -27,8 +27,8 @@ final allProducts = [
   ),
   Product(
     id: '4',
-    title: 'Moon Calendar',
-    description: 'A moon calendar app.',
+    title: 'Moon',
+    description: 'Moon - Không quên ngày giỗ',
     imagePath: 'assets/images/moon_calendar.png',
     url: 'https://moon.livana.dev',
     type: 'app',
