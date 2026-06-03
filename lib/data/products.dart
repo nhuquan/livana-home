@@ -16,7 +16,7 @@ final allProducts = [
     screenshots: [
       'assets/images/screenshots/xecare_1.png',
       'assets/images/screenshots/xecare_2.png',
-      'assets/images/screenshots/xecare_3.png',
+      // 'assets/images/screenshots/xecare_3.png',
     ],
     type: 'app',
   ),
